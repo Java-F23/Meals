@@ -2,24 +2,26 @@ import java.util.ArrayList;
 
 public class Meal {
     private final String name;
+    private final String chefName;
     private final ArrayList<Ingredient> ingredients;
     private final ArrayList<Float> quantity;
     private final int preparationTime;
     private final int cookingTime;
     private final String instructions;
     private final String cuisine;
-    private ArrayList<String> reviews;
     private int bookmarkCount;
+    private final ArrayList<Review> reviews;
 
-    public Meal(String name, ArrayList<Ingredient> ingredients, ArrayList<Float> quantity, int preparationTime, int cookingTime, String instructions, String cuisine) {
+    public Meal(String name, String chefName, ArrayList<Ingredient> ingredients, ArrayList<Float> quantity, int preparationTime, int cookingTime, String instructions, String cuisine) {
         this.name = name;
+        this.chefName = chefName;
         this.ingredients = ingredients;
         this.quantity = quantity;
         this.preparationTime = preparationTime;
         this.cookingTime = cookingTime;
         this.instructions = instructions;
         this.cuisine = cuisine;
-        this.reviews = new ArrayList<String>();
+        this.reviews = new ArrayList<>();
         this.bookmarkCount = 0;
     }
 
@@ -75,7 +77,7 @@ public class Meal {
     }
 
     public String getDietaryRestrictionsString() {
-        ArrayList<String> dietaryRestrictions = new ArrayList<String>();
+        ArrayList<String> dietaryRestrictions = new ArrayList<>();
         dietaryRestrictions.add("Vegetarian");
         dietaryRestrictions.add("Vegan");
         dietaryRestrictions.add("Gluten Free");
@@ -136,11 +138,11 @@ public class Meal {
         return meal;
     }
 
-    public void addReview(String review) {
+    public void addReview(Review review) {
         reviews.add(review);
     }
 
-    public ArrayList<String> getReviews() {
+    public ArrayList<Review> getReviews() {
         return reviews;
     }
 
@@ -150,5 +152,33 @@ public class Meal {
 
     public ArrayList<Float> getQuantities() {
         return quantity;
+    }
+
+    public String getChefName() {
+        return chefName;
+    }
+
+    public int getBookmarkCount() {
+        return bookmarkCount;
+    }
+
+    public float getAverageRating() {
+        if (reviews.isEmpty()) {
+            return 0;
+        }
+
+        float totalRating = 0;
+        for (Review review : reviews) {
+            totalRating += review.getRating();
+        }
+        return totalRating / reviews.size();
+    }
+
+    public String getReviewsString() {
+        String reviewsString = "";
+        for (Review review : reviews) {
+            reviewsString += review.getReviewerUserName() + ": " + review.getRating() + "/5\n" + review.getText() + "\n\n";
+        }
+        return reviewsString;
     }
 }

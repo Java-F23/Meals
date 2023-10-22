@@ -15,17 +15,26 @@ public class Main {
     private static final ArrayList<Meal> meals = new ArrayList<>();
 
     public static void main(String[] args) {
+        // users
+        User shady = new User("Shady", "s@s.s", "shady", "shady", "01111111111", 'c');
+        User youssef = new User("Youssef", "y@y.y", "youssef", "youssef", "01111111111", 'u');
+        User Saleh = new User("Saleh", "ss@s.s", "saleh", "saleh", "01111111111", 'u');
+
+        users.add(shady);
+        users.add(youssef);
+        users.add(Saleh);
+
         // Ingredients
-        Ingredient salt = new Ingredient("Salt", 0, "g", "Salt is a mineral composed primarily of sodium chloride, a chemical compound belonging to the larger class of salts; salt in its natural form as a crystalline mineral is known as rock salt or halite.", true, true, true, true, true, true);
-        Ingredient cheese = new Ingredient("Cheese", 4.02f, "g", "Cheese is a dairy product derived from milk that is produced in a wide range of flavors, textures, and forms by coagulation of the milk protein casein.", true, false, true, false, true, true);
-        Ingredient lettuce = new Ingredient("Lettuce", 0.05f, "g", "Lettuce is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds.", true, true, true, true, true, true);
-        Ingredient tomato = new Ingredient("Tomato", 0.22f, "g", "The tomato is the edible, often red, berry of the plant Solanum lycopersicum, commonly known as a tomato plant.", true, true, true, true, true, true);
-        Ingredient flour = new Ingredient("Flour", 4.55f, "g", "Flour is a powder made by grinding raw grains, roots, beans, nuts, or seeds. Flours are used to make many different foods.", true, true, false, true, true, true);
-        Ingredient tomatoSauce = new Ingredient("Tomato Sauce", 0.80f, "g", "Tomato sauce, refers to any of a very large number of sauces made primarily from tomatoes, usually to be served as part of a dish.", true, true, true, true, true, true);
-        Ingredient mozzarella = new Ingredient("Mozzarella", 3.00f, "g", "Mozzarella is a traditionally southern Italian cheese made from Italian buffalo's milk by the pasta filata method.", true, false, true, false, true, true);
-        Ingredient pepperoni = new Ingredient("Pepperoni", 1.42f, "g", "Pepperoni, also known as pepperoni sausage, is an American variety of salami, usually made from cured pork and beef mixed together.", false, false, true, true, true, true);
-        Ingredient chicken = new Ingredient("Chicken", 2.39f, "g", "The chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.", false, false, true, true, true, true);
-        Ingredient beef = new Ingredient("Beef", 2.50f, "g", "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.", false, false, true, true, true, false);
+        Ingredient salt = new Ingredient("Salt", "shady", 0, "g", "Salt is a mineral composed primarily of sodium chloride, a chemical compound belonging to the larger class of salts; salt in its natural form as a crystalline mineral is known as rock salt or halite.", true, true, true, true, true, true);
+        Ingredient cheese = new Ingredient("Cheese", "shady", 4.02f, "g", "Cheese is a dairy product derived from milk that is produced in a wide range of flavors, textures, and forms by coagulation of the milk protein casein.", true, false, true, false, true, true);
+        Ingredient lettuce = new Ingredient("Lettuce", "shady", 0.05f, "g", "Lettuce is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds.", true, true, true, true, true, true);
+        Ingredient tomato = new Ingredient("Tomato", "shady", 0.22f, "g", "The tomato is the edible, often red, berry of the plant Solanum lycopersicum, commonly known as a tomato plant.", true, true, true, true, true, true);
+        Ingredient flour = new Ingredient("Flour", "shady", 4.55f, "g", "Flour is a powder made by grinding raw grains, roots, beans, nuts, or seeds. Flours are used to make many different foods.", true, true, false, true, true, true);
+        Ingredient tomatoSauce = new Ingredient("Tomato Sauce", "shady", 0.80f, "g", "Tomato sauce, refers to any of a very large number of sauces made primarily from tomatoes, usually to be served as part of a dish.", true, true, true, true, true, true);
+        Ingredient mozzarella = new Ingredient("Mozzarella", "shady", 3.00f, "g", "Mozzarella is a traditionally southern Italian cheese made from Italian buffalo's milk by the pasta filata method.", true, false, true, false, true, true);
+        Ingredient pepperoni = new Ingredient("Pepperoni", "shady", 1.42f, "g", "Pepperoni, also known as pepperoni sausage, is an American variety of salami, usually made from cured pork and beef mixed together.", false, false, true, true, true, true);
+        Ingredient chicken = new Ingredient("Chicken", "shady", 2.39f, "g", "The chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.", false, false, true, true, true, true);
+        Ingredient beef = new Ingredient("Beef", "shady", 2.50f, "g", "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.", false, false, true, true, true, false);
 
         ingredients.add(salt);
         ingredients.add(cheese);
@@ -39,7 +48,7 @@ public class Main {
         ingredients.add(beef);
 
         // Meals
-        Meal salad = new Meal("Salad", new ArrayList<>(), new ArrayList<>(), 10, 0, "Mix all ingredients together.", "American");
+        Meal salad = new Meal("Salad", "shady", new ArrayList<>(), new ArrayList<>(), 10, 0, "Mix all ingredients together.", "American");
         salad.addIngredient(salt, 10f);
 
         salad.addIngredient(cheese, 10f);
@@ -47,10 +56,11 @@ public class Main {
         salad.addIngredient(tomato, 10f);
         meals.add(salad);
 
-        Meal pizza = new Meal("Pizza", new ArrayList<>(), new ArrayList<>(), 30, 30, "gently shape the dough into a pizza circle, spread the tomato sauce on the dough, add the mozzarella and pepperoni, bake for 30 minutes at 350 degrees Fahrenheit.", "Italian");
+        Meal pizza = new Meal("Pizza", "shady", new ArrayList<>(), new ArrayList<>(), 30, 30, "gently shape the dough into a pizza circle, spread the tomato sauce on the dough, add the mozzarella and pepperoni, bake for 30 minutes at 350 degrees Fahrenheit.", "Italian");
         pizza.addIngredient(flour, 10f);
         pizza.addIngredient(tomatoSauce, 10f);
         pizza.addIngredient(mozzarella, 10f);
+        pizza.addIngredient(cheese, 5f);
         pizza.addIngredient(pepperoni, 10f);
         meals.add(pizza);
 
@@ -73,7 +83,7 @@ public class Main {
                 if (user != null) {
                     // user is signed in
                     boolean userSignedIn = true;
-                    if (user.role == 'c') {
+                    if (user.getRole() == 'c') {
                         // user is a chef
                         while (userSignedIn) {
                             System.out.println("1. Log out");
@@ -109,13 +119,13 @@ public class Main {
                             }
                             else if (option == 4) {
                                 // add new ingredient
-                                Ingredient ingredient = createIngredient();
+                                Ingredient ingredient = createIngredient(user.getUsername());
                                 ingredients.add(ingredient);
                                 System.out.println("You have successfully added a new ingredient!");
                             }
                             else if (option == 5) {
                                 // add new meal
-                                Meal meal = createMeal();
+                                Meal meal = createMeal(user.getUsername());
                                 meals.add(meal);
                                 System.out.println("You have successfully added a new meal!");
                             }
@@ -124,17 +134,25 @@ public class Main {
                                 if (removeIngredient()){
                                     System.out.println("You have successfully removed the ingredient!");
                                 }
+                                else {
+                                    System.out.println("Ingredient not found.");
+                                }
                             }
                             else if (option == 7) {
                                 // remove meal
-                                removeMeal();
+                                if (removeMeal()) {
+                                    System.out.println("You have successfully removed the meal!");
+                                }
+                                else {
+                                    System.out.println("Meal not found.");
+                                }
                             }
                             else if (option == 8) {
                                 // edit ingredient
                                 // editing ingredient by removing it and adding it again with new user data
                                 // removeIngredient returns true if it was found hence we can add it again
                                 if (removeIngredient()){
-                                    Ingredient ingredient = createIngredient();
+                                    Ingredient ingredient = createIngredient(user.getUsername());
                                     ingredients.add(ingredient);
                                     System.out.println("You have successfully edited the ingredient!");
                                 }
@@ -142,7 +160,6 @@ public class Main {
                             else if (option == 9) {
                                 // edit meal
                                 // edit meal by editing details or adding/removing ingredients
-
                                 System.out.println("Do you want to edit the details or the ingredients of the meal?");
                                 System.out.println("1. Edit all details");
                                 System.out.println("2. Edit ingredients list only");
@@ -152,7 +169,7 @@ public class Main {
 
                                 if (editOption == 1){
                                     if (removeMeal()){
-                                        Meal meal = createMeal();
+                                        Meal meal = createMeal(user.getUsername());
                                         meals.add(meal);
                                         System.out.println("You have successfully edited the meal!");
                                     }
@@ -266,8 +283,16 @@ public class Main {
                                 }
                             }
                             else if (option == 10) {
-                                // generate report on popularity of meal recipes and user feedback
-                                // TODO
+                                // generate report on popularity of meal recipes of signed in chef and user feedback
+                                System.out.println("Report on popularity of meal recipes and user feedback:");
+                                System.out.println("Meal name | Number of bookmarks | Average rating | Number of reviews");
+                                for (Meal m : meals) {
+                                    if (m.getChefName().equals(user.getUsername())) {
+                                        System.out.printf("%s | %d | %.2f | %d\n", m.getName(), m.getBookmarkCount(), m.getAverageRating(), m.getReviews().size());
+                                        System.out.println("Reviews:");
+                                        System.out.println(m.getReviewsString());
+                                    }
+                                }
                             }
                             else {
                                 // invalid option
@@ -287,8 +312,9 @@ public class Main {
                             System.out.println("8. Create meal plans for the week and generate a shopping list");
                             System.out.println("9. View meal schedules");
                             System.out.println("10. View nutritional information of meals");
-                            System.out.println("11. View historical meal schedules and the meals you've prepared in the past");
-                            System.out.println("12. Rate meals");
+                            System.out.println("11. Review meals");
+                            System.out.println("12. View shopping list");
+                            System.out.println("13. View historical meal schedules and the meals you've prepared in the past");
 
                             int option = scanner.nextInt();
                             scanner.nextLine();
@@ -306,7 +332,7 @@ public class Main {
                             }
                             else if (option == 3) {
                                 // search for meals based on specific criteria
-                                // criteria: cuisine type or dietary preferences (vegetarian, vegan, gluten free, dairy free, nut free, red meat free)
+                                // criteria: cuisine type or dietary preferences (vegetarian, vegan, gluten-free, dairy free, nut free, red meat free)
 
                                 // cuisine type
                                 System.out.println("Enter the cuisine type (enter 0 to exit):");
@@ -334,7 +360,10 @@ public class Main {
                                         }
                                     }
                                     if (cuisineTypeFound) {
-                                        cuisineTypeChoices.add(cuisineType);
+                                        if (!cuisineTypeChoices.contains(cuisineType)) {
+                                            cuisineTypeChoices.add(cuisineType);
+                                        }
+                                        System.out.println("Enter the cuisine type (enter 0 to exit):");
                                     } else {
                                         System.out.println("Cuisine type not found. Enter the cuisine type:");
                                     }
@@ -358,73 +387,94 @@ public class Main {
 
                                 while (dietaryPreference != 0) {
                                     if (dietaryPreference == 1) {
-                                        dietaryPreferenceChoices.add("vegetarian");
+                                        if (!dietaryPreferenceChoices.contains("vegetarian")) {
+                                            dietaryPreferenceChoices.add("vegetarian");
+                                        }
                                     } else if (dietaryPreference == 2) {
-                                        dietaryPreferenceChoices.add("vegan");
+                                        if (!dietaryPreferenceChoices.contains("vegan")) {
+                                            dietaryPreferenceChoices.add("vegan");
+                                        }
                                     } else if (dietaryPreference == 3) {
-                                        dietaryPreferenceChoices.add("gluten free");
+                                        if (!dietaryPreferenceChoices.contains("gluten free")) {
+                                            dietaryPreferenceChoices.add("gluten free");
+                                        }
                                     } else if (dietaryPreference == 4) {
-                                        dietaryPreferenceChoices.add("dairy free");
+                                        if (!dietaryPreferenceChoices.contains("dairy free")) {
+                                            dietaryPreferenceChoices.add("dairy free");
+                                        }
                                     } else if (dietaryPreference == 5) {
-                                        dietaryPreferenceChoices.add("nut free");
+                                        if (!dietaryPreferenceChoices.contains("nut free")) {
+                                            dietaryPreferenceChoices.add("nut free");
+                                        }
                                     } else if (dietaryPreference == 6) {
-                                        dietaryPreferenceChoices.add("red meat free");
+                                        if (!dietaryPreferenceChoices.contains("red meat free")) {
+                                            dietaryPreferenceChoices.add("red meat free");
+                                        }
                                     } else if (dietaryPreference == 7) {
                                         dietaryPreferenceChoices.clear();
-                                        break;
                                     } else {
                                         System.out.println("Invalid option. Enter the dietary preference:");
                                     }
                                     dietaryPreference = scanner.nextInt();
                                     scanner.nextLine();
-
-                                    // filter based on cuisine type and dietary preferences
-                                    ArrayList<Meal> filteredMeals = new ArrayList<>();
-                                    for (Meal m : meals) {
-                                        if (cuisineTypeChoices.contains(m.getCuisine())) {
-                                            boolean mealHasDietaryRestrictions = false;
-                                            for (Ingredient i : m.getIngredients()) {
-                                                for (String dietaryPreferenceChoice : dietaryPreferenceChoices) {
-                                                    if (dietaryPreferenceChoice.equals("vegetarian") && !i.isVegetarian()) {
-                                                        mealHasDietaryRestrictions = true;
-                                                        break;
-                                                    }
-                                                    if (dietaryPreferenceChoice.equals("vegan") && !i.isVegan()) {
-                                                        mealHasDietaryRestrictions = true;
-                                                        break;
-                                                    }
-                                                    if (dietaryPreferenceChoice.equals("gluten free") && !i.isGlutenFree()) {
-                                                        mealHasDietaryRestrictions = true;
-                                                        break;
-                                                    }
-                                                    if (dietaryPreferenceChoice.equals("dairy free") && !i.isDairyFree()) {
-                                                        mealHasDietaryRestrictions = true;
-                                                        break;
-                                                    }
-                                                    if (dietaryPreferenceChoice.equals("nut free") && !i.isNutFree()) {
-                                                        mealHasDietaryRestrictions = true;
-                                                        break;
-                                                    }
-                                                    if (dietaryPreferenceChoice.equals("red meat free") && !i.isRedMeatFree()) {
-                                                        mealHasDietaryRestrictions = true;
-                                                        break;
-                                                    }
+                                }
+                                // filter based on cuisine type and dietary preferences
+                                ArrayList<Meal> filteredMeals = new ArrayList<>();
+                                for (Meal m : meals) {
+                                    if (cuisineTypeChoices.contains(m.getCuisine())) {
+                                        if (dietaryPreferenceChoices.isEmpty()) {
+                                            filteredMeals.add(m);
+                                            continue;
+                                        }
+                                        boolean mealHasDietaryRestrictions = false;
+                                        for (Ingredient i : m.getIngredients()) {
+                                            if (i.hasUnspecifiedRestrictions()) {
+                                                mealHasDietaryRestrictions = true;
+                                                break;
+                                            }
+                                            for (String dietaryPreferenceChoice : dietaryPreferenceChoices) {
+                                                if (dietaryPreferenceChoice.equals("vegetarian") && !i.isVegetarian()) {
+                                                    mealHasDietaryRestrictions = true;
+                                                    break;
                                                 }
-                                                if (mealHasDietaryRestrictions) {
+                                                if (dietaryPreferenceChoice.equals("vegan") && !i.isVegan()) {
+                                                    mealHasDietaryRestrictions = true;
+                                                    break;
+                                                }
+                                                if (dietaryPreferenceChoice.equals("gluten free") && !i.isGlutenFree()) {
+                                                    mealHasDietaryRestrictions = true;
+                                                    break;
+                                                }
+                                                if (dietaryPreferenceChoice.equals("dairy free") && !i.isDairyFree()) {
+                                                    mealHasDietaryRestrictions = true;
+                                                    break;
+                                                }
+                                                if (dietaryPreferenceChoice.equals("nut free") && !i.isNutFree()) {
+                                                    mealHasDietaryRestrictions = true;
+                                                    break;
+                                                }
+                                                if (dietaryPreferenceChoice.equals("red meat free") && !i.isRedMeatFree()) {
+                                                    mealHasDietaryRestrictions = true;
                                                     break;
                                                 }
                                             }
-                                            if (!mealHasDietaryRestrictions) {
-                                                filteredMeals.add(m);
+                                            if (mealHasDietaryRestrictions) {
+                                                break;
                                             }
                                         }
+                                        if (!mealHasDietaryRestrictions) {
+                                            filteredMeals.add(m);
+                                        }
                                     }
+                                }
 
-                                    // print filtered meals
-                                    System.out.println("Filtered meals:");
-                                    for (Meal m : filteredMeals) {
-                                        System.out.println("- " + m);
-                                    }
+                                // print filtered meals
+                                System.out.println("Filters:");
+                                System.out.println("- Cuisine type: " + cuisineTypeChoices);
+                                System.out.println("- Dietary preferences: " + dietaryPreferenceChoices);
+                                System.out.println("Filtered meals:");
+                                for (Meal m : filteredMeals) {
+                                    System.out.println("- " + m);
                                 }
                             }
                             else if (option == 4) {
@@ -651,7 +701,7 @@ public class Main {
                                 }
 
                                 // save meal plan
-                                user.setCurrentWeekMealPlan(mealPlan);
+                                user.setCurrentWeekMealPlan(new MealWeek(mealPlan));
                                 // generate shopping list
                                 ArrayList<Ingredient> shoppingList = new ArrayList<>();
                                 ArrayList<Float> shoppingListQuantities = new ArrayList<>();
@@ -692,9 +742,15 @@ public class Main {
                                 // view meal schedules
 
                                 // print all meal schedules
-                                for (int i = 0; i < 7; i++) {
+                                int scheduleSize = user.getCurrentWeekMealPlan().getMealDays().size();
+
+                                if (scheduleSize == 0) {
+                                    System.out.println("No meal schedules found.");
+                                    continue;
+                                }
+                                for (int i = 0; i < scheduleSize; i++) {
                                     System.out.println("Day " + (i + 1) + ":");
-                                    System.out.println(user.getCurrentWeekMealPlan().get(i));
+                                    System.out.println(user.getCurrentWeekMealPlan().getMealDays().get(i));
                                 }
                             }
                             else if (option == 10) {
@@ -731,8 +787,74 @@ public class Main {
                                 }
                             }
                             else if (option == 11) {
+                                // review meals
+                                for (Meal m : meals) {
+                                    System.out.println("- " + m);
+                                }
+
+                                // input meal name
+                                System.out.println("Enter the name of the meal:");
+                                String mealName = scanner.nextLine();
+                                while (mealName.isEmpty()) {
+                                    System.out.println("Name cannot be empty. Enter the name of the meal:");
+                                    mealName = scanner.nextLine();
+                                }
+
+                                // find meal
+                                Meal meal = null;
+                                for (Meal m : meals) {
+                                    if (m.getName().equals(mealName)) {
+                                        meal = m;
+                                        break;
+                                    }
+                                }
+
+                                if (meal != null) {
+                                    // user can't review meal more than once
+                                    boolean reviewed = false;
+                                    for (Review r : meal.getReviews()) {
+                                        if (r.getReviewerUserName().equals(user.getUsername())) {
+                                            System.out.println("You have already reviewed this meal.");
+                                            reviewed = true;
+                                            break;
+                                        }
+                                    }
+                                    if (reviewed) {
+                                        continue;
+                                    }
+
+                                    System.out.println("Enter your rating (1-5):");
+                                    int rating = scanner.nextInt();
+                                    scanner.nextLine();
+                                    while (rating < 1 || rating > 5) {
+                                        System.out.println("Invalid rating. Enter your rating (1-5):");
+                                        rating = scanner.nextInt();
+                                        scanner.nextLine();
+                                    }
+                                    System.out.println("Enter your review:");
+                                    String review = scanner.nextLine();
+                                    while (review.isEmpty()) {
+                                        System.out.println("Review cannot be empty. Enter your review:");
+                                        review = scanner.nextLine();
+                                    }
+                                    meal.addReview(new Review(user.getUsername(), rating, review));
+                                    System.out.println("You have successfully reviewed the meal!");
+                                } else {
+                                    System.out.println("Meal not found.");
+                                }
+                            }
+                            else if (option == 12) {
+                                // view shopping list
+                                user.printShoppingList();
+                            }
+                            else if (option == 13) {
                                 // view historical meal schedules and the meals you've prepared in the past
-                                // TODO
+                                System.out.println("Historical meal schedules and the meals you've prepared in the past:");
+                                for (MealWeek mealWeek : user.getMealPlanHistory()) {
+                                    System.out.println("Meal schedule:");
+                                    System.out.println(mealWeek);
+                                    System.out.println("----------------------------------------");
+                                }
                             }
                             else {
                                 // invalid option
@@ -760,12 +882,12 @@ public class Main {
                     //users
                     for (User u : users) {
                         // print user info with labels
-                        System.out.println("Name: " + u.name);
-                        System.out.println("Email: " + u.email);
-                        System.out.println("Password: " + u.password);
-                        System.out.println("Username: " + u.username);
-                        System.out.println("Phone: " + u.phone);
-                        System.out.println("Role: " + u.role);
+                        System.out.println("Name: " + u.getName());
+                        System.out.println("Email: " + u.getEmail());
+                        System.out.println("Password: " + u.getPassword());
+                        System.out.println("Username: " + u.getUsername());
+                        System.out.println("Phone: " + u.getPhone());
+                        System.out.println("Role: " + u.getRole());
                         System.out.println();
                     }
 
@@ -811,6 +933,30 @@ public class Main {
             username = scanner.nextLine();
         }
 
+        // username must be unique (no duplicates) in users list
+        boolean usernameExists = false;
+        for (User u : users) {
+            if (u.getUsername().equals(username)) {
+                usernameExists = true;
+                break;
+            }
+        }
+        while (usernameExists) {
+            System.out.println("Username already exists. Enter your username:");
+            username = scanner.nextLine();
+            while (username.isEmpty()) {
+                System.out.println("Username cannot be empty. Enter your username:");
+                username = scanner.nextLine();
+            }
+            usernameExists = false;
+            for (User u : users) {
+                if (u.getUsername().equals(username)) {
+                    usernameExists = true;
+                    break;
+                }
+            }
+        }
+
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
         while (password.isEmpty()) {
@@ -842,7 +988,7 @@ public class Main {
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
         for (User u : users) {
-            if (u.username.equals(username) && u.password.equals(password)) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                 System.out.println("You have successfully signed in!");
                 return u;
             }
@@ -851,7 +997,7 @@ public class Main {
         return null;
     }
 
-    private static Ingredient createIngredient(){
+    private static Ingredient createIngredient(String chefName){
         // create ingredient
         // ingredient name must be unique (no duplicates) in ingredients list
         Scanner scanner = new Scanner(System.in);
@@ -967,7 +1113,7 @@ public class Main {
         }
         boolean isRedMeatFree = answer.equals("y");
 
-        return new Ingredient(name, calories, unit, description, isVegetarian, isVegan, isGlutenFree, isDairyFree, isNutFree, isRedMeatFree);
+        return new Ingredient(name, chefName, calories, unit, description, isVegetarian, isVegan, isGlutenFree, isDairyFree, isNutFree, isRedMeatFree);
     }
 
     private static boolean removeIngredient(){
@@ -996,7 +1142,7 @@ public class Main {
         }
     }
 
-    private static Meal createMeal(){
+    private static Meal createMeal(String chefName){
         // meal name must be unique (no duplicates) in meals list
         Scanner scanner = new Scanner(System.in);
 
@@ -1100,7 +1246,7 @@ public class Main {
             ingredientName = scanner.nextLine();
         }
 
-        return new Meal(name, mealIngredients, mealIngredientQuantities, preparationTime, cookingTime, instructions, cuisine);
+        return new Meal(name, chefName, mealIngredients, mealIngredientQuantities, preparationTime, cookingTime, instructions, cuisine);
     }
 
     private static boolean removeMeal(){
@@ -1121,13 +1267,7 @@ public class Main {
                 break;
             }
         }
-        if (found) {
-            System.out.println("You have successfully removed the meal!");
-            return true;
-        } else {
-            System.out.println("Meal not found.");
-            return false;
-        }
+        return found;
     }
 
     private static boolean isValidEmail(String email) {

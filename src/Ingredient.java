@@ -1,6 +1,7 @@
 public class Ingredient {
     // fields
     private final String name;
+    private final String chefName;
     private final float calories;
     private final String unit;
     private final String description;
@@ -13,8 +14,9 @@ public class Ingredient {
     private boolean unspecifiedDietaryRestrictions;
 
     // constructor
-    public Ingredient(String name, float calories, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) {
+    public Ingredient(String name, String chefName, float calories, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) {
         this.name = name;
+        this.chefName = chefName;
         this.calories = calories;
         this.unit = unit;
         this.description = description;
@@ -28,8 +30,8 @@ public class Ingredient {
     }
 
     // constructor for ingredients without dietary restrictions
-    public Ingredient(String name, int calories, String unit, String description) {
-        this(name, calories, unit, description, false, false, false, false, false, false);
+    public Ingredient(String name, String chefName, int calories, String unit, String description) {
+        this(name, chefName, calories, unit, description, false, false, false, false, false, false);
         this.unspecifiedDietaryRestrictions = true;
     }
 
@@ -119,5 +121,9 @@ public class Ingredient {
             details += "Red Meat Free: No\n";
         }
         return details;
+    }
+
+    public String getChefName() {
+        return chefName;
     }
 }
