@@ -17,31 +17,30 @@ public class WelcomeFrame extends JFrame {
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         verticalBox.add(Box.createVerticalGlue());
         verticalBox.add(welcomeLabel);
-        verticalBox.add(Box.createRigidArea(new Dimension(0, 20))); // Add some vertical spacing
+        verticalBox.add(Box.createRigidArea(new Dimension(0, 20)));
 
         signUpButton = new JButton("Sign Up");
         signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         verticalBox.add(signUpButton);
-        verticalBox.add(Box.createRigidArea(new Dimension(0, 10))); // Add some vertical spacing
+        verticalBox.add(Box.createRigidArea(new Dimension(0, 10)));
 
         signInButton = new JButton("Sign In");
         signInButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         verticalBox.add(signInButton);
         verticalBox.add(Box.createVerticalGlue());
 
-        signUpButton.addActionListener(e -> {
-            new SignUpFrame();
-            dispose();
-        });
-        signInButton.addActionListener(e -> {
-            new SignInFrame();
-            dispose();
-        });
-
         setLayout(new BorderLayout());
         add(verticalBox, BorderLayout.CENTER);
 
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public JButton getSignUpButton() {
+        return signUpButton;
+    }
+
+    public JButton getSignInButton() {
+        return signInButton;
     }
 }

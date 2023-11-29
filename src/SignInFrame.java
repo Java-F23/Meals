@@ -2,21 +2,21 @@ import javax.swing.*;
 
 public class SignInFrame extends JFrame {
 
-
+    private SignInPanel signInPanel;
     public SignInFrame() {
         setTitle("Sign In");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 400);
         setResizable(false);
 
-        SignInPanel panel = new SignInPanel();
-        add(panel);
+        signInPanel = new SignInPanel();
+        add(signInPanel);
 
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new SignInFrame();
+    public SignInPanel getSignInPanel() {
+        return signInPanel;
     }
 }

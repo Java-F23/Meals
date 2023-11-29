@@ -1,4 +1,8 @@
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class InvalidPhoneNumberException extends Exception {
     public InvalidPhoneNumberException(String message) {
@@ -10,12 +14,55 @@ public class Utils {
     // logged in user
     private static User loggedInUser = null;
 
-    // Database
-    private static final ArrayList<Chef> chefs = new ArrayList<>();
-    private static final ArrayList<MealPrepper> mealPreppers = new ArrayList<>();
-    private static final ArrayList<Ingredient> ingredients = new ArrayList<>();
-//    private static final ArrayList<Meal> meals = new ArrayList<>();
+    private static final String CHEFS_FILE = "chefs.ser";
+    private static final String MEAL_PREPPERS_FILE = "mealPreppers.ser";
+    private static final String INGREDIENTS_FILE = "ingredients.ser";
+    private static final String MEALS_FILE = "meals.ser";
 
+    public static String getChefsFile() {
+        return CHEFS_FILE;
+    }
+
+    public static String getMealPreppersFile() {
+        return MEAL_PREPPERS_FILE;
+    }
+
+    public static String getIngredientsFile() {
+        return INGREDIENTS_FILE;
+    }
+
+    public static String getMealsFile() {
+        return MEALS_FILE;
+    }
+
+    public static void saveToFile(Serializable object, String fileName) {
+        // use FileHandler class to save object to file
+        FileHandler<Serializable> fileHandler = new FileHandler<>(fileName);
+        if (fileHandler.AddNew(object)){
+            System.out.println("Saved to file " + fileName);
+        } else {
+            System.out.println("Error saving to file " + fileName);
+        }
+    }
+
+    public static<T extends Serializable> void loadFromFile(String fileName, ArrayList<T> list) {
+        // use FileHandler class to load object from file
+        FileHandler<T> fileHandler = new FileHandler<>(fileName);
+        ArrayList<T> loadedList = fileHandler.readFile();
+        if (loadedList != null) {
+            list.addAll(loadedList);
+        }
+    }
+
+    public static<T extends Serializable> void saveEditedToFile(ArrayList<T> list, String fileName) {
+        // use FileHandler class to edit object in file by rewriting the whole file with a given list
+        FileHandler<T> fileHandler = new FileHandler<>(fileName);
+        if (fileHandler.SaveEdited(list)){
+            System.out.println("Saved to file " + fileName);
+        } else {
+            System.out.println("Error saving to file " + fileName);
+        }
+    }
 
     public static void registerUser(String name, String username, String email, String phone, String role,  String password) {
         if (name.isEmpty()) {
@@ -32,8 +79,9 @@ public class Utils {
 
         // username must be unique (no duplicates) in users list
         ArrayList<User> users = new ArrayList<>();
-        users.addAll(chefs);
-        users.addAll(mealPreppers);
+        loadFromFile(CHEFS_FILE, users);
+        loadFromFile(MEAL_PREPPERS_FILE, users);
+
         for (User u : users) {
             if (u.getUsername().equals(username)) {
                 throw new IllegalArgumentException("Username already exists");
@@ -51,9 +99,11 @@ public class Utils {
         }
 
         if (role.equalsIgnoreCase("Chef")) {
-            chefs.add(new Chef(name, email, username, password, phone));
+            Chef chef = new Chef(name, email, username, password, phone);
+            saveToFile(chef, CHEFS_FILE);
         } else if (role.equalsIgnoreCase("User")) {
-            mealPreppers.add(new MealPrepper(name, email, username, password, phone));
+            MealPrepper mealPrepper = new MealPrepper(name, email, username, password, phone);
+            saveToFile(mealPrepper, MEAL_PREPPERS_FILE);
         } else {
             throw new IllegalArgumentException("Invalid role");
         }
@@ -124,22 +174,31 @@ public class Utils {
     }
 
     public static ArrayList<Chef> getChefs() {
+        // load chefs from file
+        ArrayList<Chef> chefs = new ArrayList<>();
+        loadFromFile(CHEFS_FILE, chefs);
         return chefs;
     }
 
     public static ArrayList<MealPrepper> getMealPreppers() {
+        // load meal preppers from file
+        ArrayList<MealPrepper> mealPreppers = new ArrayList<>();
+        loadFromFile(MEAL_PREPPERS_FILE, mealPreppers);
         return mealPreppers;
     }
 
     public static ArrayList<Ingredient> getIngredients() {
+        // load ingredients from file
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        loadFromFile(INGREDIENTS_FILE, ingredients);
         return ingredients;
     }
 
-    public static void initializeData() {
+    public static void initializeData() throws DuplicateError {
         // users
-        chefs.add(new Chef("Shady", "s@s.s", "shady", "shady", "01111111111"));
-        chefs.add(new Chef("Youssef", "y@y.y", "youssef", "youssef", "01211111111"));
-        mealPreppers.add(new MealPrepper("Saleh", "ss@s.s", "saleh", "saleh", "01311111111"));
+        saveToFile(new Chef("Shady", "s@s.s", "shady", "shady", "01111111111"), CHEFS_FILE);
+        saveToFile(new Chef("Youssef", "y@y.y", "youssef", "youssef", "01211111111"), CHEFS_FILE);
+        saveToFile(new MealPrepper("Saleh", "ss@s.s", "saleh", "saleh", "01311111111"), MEAL_PREPPERS_FILE);
 
         // Ingredients
         Ingredient salt = new Ingredient("Salt", "shady", 0, "g", "Salt is a mineral composed primarily of sodium chloride, a chemical compound belonging to the larger class of salts; salt in its natural form as a crystalline mineral is known as rock salt or halite.", true, true, true, true, true, true);
@@ -153,16 +212,16 @@ public class Utils {
         Ingredient chicken = new Ingredient("Chicken", "shady", 2.39f, "g", "The chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.", false, false, true, true, true, true);
         Ingredient beef = new Ingredient("Beef", "shady", 2.50f, "g", "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.", false, false, true, true, true, false);
 
-        ingredients.add(salt);
-        ingredients.add(cheese);
-        ingredients.add(lettuce);
-        ingredients.add(tomato);
-        ingredients.add(flour);
-        ingredients.add(tomatoSauce);
-        ingredients.add(mozzarella);
-        ingredients.add(pepperoni);
-        ingredients.add(chicken);
-        ingredients.add(beef);
+        saveToFile(salt, INGREDIENTS_FILE);
+        saveToFile(cheese, INGREDIENTS_FILE);
+        saveToFile(lettuce, INGREDIENTS_FILE);
+        saveToFile(tomato, INGREDIENTS_FILE);
+        saveToFile(flour, INGREDIENTS_FILE);
+        saveToFile(tomatoSauce, INGREDIENTS_FILE);
+        saveToFile(mozzarella, INGREDIENTS_FILE);
+        saveToFile(pepperoni, INGREDIENTS_FILE);
+        saveToFile(chicken, INGREDIENTS_FILE);
+        saveToFile(beef, INGREDIENTS_FILE);
 
         // Meals
 //        Meal salad = new Meal("Salad", "shady", new ArrayList<>(), 10, 0, "Mix all ingredients together.", "American");
@@ -181,4 +240,14 @@ public class Utils {
 //        meals.add(pizza);
     }
 
+    public static void addLogo(JPanel panel, int dimension) {
+        try {
+            ImageIcon logo = new ImageIcon(Objects.requireNonNull(Utils.class.getResource("cookease.png")));
+            JLabel logoLabel = new JLabel(logo);
+            logoLabel.setPreferredSize(new Dimension(dimension, dimension));
+            panel.add(logoLabel, BorderLayout.CENTER);
+        } catch (Exception e) {
+            System.out.println("Error loading logo");
+        }
+    }
 }

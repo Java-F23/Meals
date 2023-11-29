@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 public class SignUpFrame extends JFrame {
+    SignUpPanel signUpPanel;
     public SignUpFrame() {
         setTitle("Sign Up");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -8,12 +9,16 @@ public class SignUpFrame extends JFrame {
         setResizable(false);
 
         // Create an instance of SignUpPanel
-        SignUpPanel signUpPanel = new SignUpPanel();
+        signUpPanel = new SignUpPanel();
 
         // Add the SignUpPanel to the frame
         add(signUpPanel);
 
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public SignUpPanel getSignUpPanel() {
+        return signUpPanel;
     }
 }

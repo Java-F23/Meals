@@ -1,4 +1,7 @@
-public class MealPrepper extends User {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class MealPrepper extends User implements Serializable {
 //    private ArrayList<Meal> bookmarkedMeals;
 //    private ArrayList<Ingredient> shoppingList; // TODO: maybe change to Meal instead of Ingredient
 //    private ArrayList<Float> shoppingListQuantities;

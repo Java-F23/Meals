@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
     private final String name;
     private final String email;
     private final String username;
@@ -33,5 +34,11 @@ public class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    // tostring
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class SignInPanel extends JPanel {
     private JTextField usernameField;
     private JPasswordField passwordField;
+    JButton signInButton;
+    JButton signUpButton;
     SignInPanel() {
         setLayout(new GridLayout(6, 1, 10, 5));
         setBorder(BorderFactory.createEmptyBorder(30, 10, 40, 10));
@@ -18,14 +20,10 @@ public class SignInPanel extends JPanel {
         passwordField = new JPasswordField(20);
 
         // Sign in button
-        JButton signInButton = getSignInButton();
+        signInButton = new JButton("Sign In");
 
         // sign up button
-        JButton signUpButton = new JButton("Not registered yet? Sign up here.");
-        signUpButton.addActionListener(e -> {
-            new SignUpFrame();
-            SwingUtilities.getWindowAncestor(this).dispose();
-        });
+        signUpButton = new JButton("Not registered yet? Sign up here.");
 
         // Add components to the panel
         add(usernameLabel);
@@ -36,41 +34,19 @@ public class SignInPanel extends JPanel {
         add(signUpButton);
     }
 
-    private JButton getSignInButton() {
-        JButton signInButton = new JButton("Sign In");
-        signInButton.addActionListener(e -> {
-            // check username and password against users arraylist
-            String username = usernameField.getText();
-            String password = new String (passwordField.getPassword());
+    public String getUsernameFieldText() {
+        return usernameField.getText();
+    }
 
-            User user = SignIn(username, password);
-            if (user != null) {
-                // open the corresponding frame
-                if (user instanceof Chef) {
-                    new ChefFrame();
-                } else if (user instanceof MealPrepper) {
-                    new MealPrepperFrame();
-                }
-                // close the sign in frame
-                SwingUtilities.getWindowAncestor(this).dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password");
-            }
-        });
+    public String getPasswordFieldText() {
+        return new String(passwordField.getPassword());
+    }
+
+    public JButton getSignInButton() {
         return signInButton;
     }
 
-    private User SignIn(String username, String password) {
-        ArrayList<User> users = new ArrayList<>();
-        users.addAll(Utils.getChefs());
-        users.addAll(Utils.getMealPreppers());
-
-        for (User u : users) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                Utils.setLoggedInUser(u);
-                return u;
-            }
-        }
-        return null;
+    public JButton getSignUpButton() {
+        return signUpButton;
     }
 }

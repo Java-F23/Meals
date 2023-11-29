@@ -1,4 +1,6 @@
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
     // fields
     private String name;
     private final String chefName;
@@ -14,7 +16,14 @@ public class Ingredient {
     private boolean unspecifiedDietaryRestrictions;
 
     // constructor
-    public Ingredient(String name, String chefName, float calories, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) {
+    public Ingredient(String name, String chefName, float calories, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) throws DuplicateError {
+        // check unique name
+        for (Ingredient ingredient : Utils.getIngredients()) {
+            if (ingredient.getName().equals(name)) {
+                throw new DuplicateError(name);
+            }
+        }
+
         this.name = name;
         this.chefName = chefName;
         this.calories = calories;
@@ -111,5 +120,10 @@ public class Ingredient {
 
     public void setRedMeatFree(boolean redMeatFree) {
         isRedMeatFree = redMeatFree;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
