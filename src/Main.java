@@ -33,10 +33,10 @@ public class Main {
 //            System.out.println(ingredient);
 //        }
 //
-//        System.out.println("Meals:");
-//        for (Meal meal : Utils.getMeals()) {
-//            System.out.println(meal);
-//        }
+        System.out.println("Meals:");
+        for (Meal meal : Utils.getMeals()) {
+            System.out.println(meal);
+        }
 
 //        // Testing Edit
 //        ArrayList<Ingredient> ingredients = Utils.getIngredients();

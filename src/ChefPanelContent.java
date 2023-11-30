@@ -106,7 +106,7 @@ public class ChefPanelContent {
                 boolean isRedMeatFree = Boolean.parseBoolean(isRedMeatFreeField.getText());
 
                 // Create a new Ingredient object and add it to the list
-                Ingredient newIngredient = new Ingredient(name, Utils.getLoggedInUser().getName(), new Nutrients(calories, fat, carbohydrates, protein),
+                Ingredient newIngredient = new Ingredient(name, Utils.getLoggedInUser().getName(), new Ingredient.Nutrients(calories, fat, carbohydrates, protein),
                         unit, description, isVegetarian, isVegan, isGlutenFree, isDairyFree, isNutFree, isRedMeatFree);
                 ingredientModel.addRow(new Object[]{newIngredient.getName(), newIngredient.getNutrients().getCalories(),
                         newIngredient.getNutrients().getProtein(), newIngredient.getNutrients().getFat(),

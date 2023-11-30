@@ -32,7 +32,7 @@ public class MealItem implements Serializable {
 
     // get nutrients method that returns the nutrients for the ingredient multiplied by the quantity
     // this is used to calculate the total nutrients for a meal
-    public Nutrients getNutrients() {
+    public Ingredient.Nutrients getNutrients() {
         return ingredient.getNutrients().multiply(quantity);
     }
 }
