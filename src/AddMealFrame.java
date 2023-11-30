@@ -1,9 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 
-public class MealPanel extends JPanel {
+public class AddMealFrame extends JFrame {
     private JLabel nameLabel, descriptionLabel, CuisineLabel, prepTimeLabel, cookTimeLabel,
             instructionsLabel, chosenIngredientsLabel;
     private JTextField nameField, descriptionField, CuisineField, prepTimeField, cookTimeField;
@@ -12,7 +11,12 @@ public class MealPanel extends JPanel {
     private JScrollPane chosenIngredientsTablePane;
     private JButton addIngredientsButton, addMealButton;
 
-    public MealPanel() {
+    public AddMealFrame() {
+        // set the frame's properties
+        setTitle("Add Meal");
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(0, 4, 5, 5)); // 8 rows, 2 columns, horizontal and vertical gap of 5 pixels
 
         // initialize the components
@@ -70,6 +74,9 @@ public class MealPanel extends JPanel {
         add(chosenIngredientsTablePane);
         add(addIngredientsButton);
         add(addMealButton);
+
+        // set the frame's visibility
+        setVisible(true);
     }
 
     public String getNameFieldText() {

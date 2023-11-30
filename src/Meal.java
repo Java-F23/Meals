@@ -55,6 +55,14 @@ public class Meal implements Serializable {
         return mealItems;
     }
 
+    public String getChefName() {
+        return chefName;
+    }
+
+    public int getBookmarkCount() {
+        return bookmarkCount;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

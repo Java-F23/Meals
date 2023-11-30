@@ -128,7 +128,7 @@ public class ChefPanelContent {
         }
     }
 
-    public static JPanel generateButtonPanel() {
+    public static JPanel generateIngredientButtonPanel() {
         JButton addIngredientButton = new JButton("Add Ingredient");
         addIngredientButton.addActionListener(e -> showAddIngredientDialog());
 
@@ -237,5 +237,30 @@ public class ChefPanelContent {
             Utils.saveEditedToFile(ingredients, Utils.getIngredientsFile());
         });
         return deleteIngredientButton;
+    }
+
+
+    public static JScrollPane generateMealsTable() {
+        DefaultTableModel mealModel = new DefaultTableModel();
+        mealModel.addColumn("Name");
+        mealModel.addColumn("Chef");
+        mealModel.addColumn("Prep Time");
+        mealModel.addColumn("Cook Time");
+        mealModel.addColumn("Instructions");
+        mealModel.addColumn("Cuisine");
+        mealModel.addColumn("# Bookmarks");
+        mealModel.addColumn("Ingredients");
+
+        JTable mealTable = new JTable(mealModel);
+        mealTable.setDefaultEditor(Object.class, null);
+
+        mealTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        mealTable.setFillsViewportHeight(true);
+
+        // add rows to the table
+        for (Meal meal : Utils.getMeals()) {
+            mealModel.addRow(new Object[]{meal.getName(), meal.getChefName(), meal.getPreparationTime(), meal.getCookingTime(), meal.getInstructions(), meal.getCuisine(), meal.getBookmarkCount(), new JButton("View Ingredients")});
+        }
+        return new JScrollPane(mealTable);
     }
 }

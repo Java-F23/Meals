@@ -59,3 +59,6 @@ public class Main {
 // TODO: the RecipeItem class should have a reference to the ingredient and the quantity
 // TODO: refactor any code that used the old way of storing ingredients in a meal
 // TODO: use enum for cuisines
+
+// TODO: show meals in manage meals panel
+// TODO: fix delete ingredient in meals panel

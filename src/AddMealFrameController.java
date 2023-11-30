@@ -1,14 +1,13 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.util.ArrayList;
 
-public class MealPanelController {
+public class AddMealFrameController {
     // this class will handle the logic for the MealPanel class which is used to add a meal recipe by the chef
-    private MealPanel mealPanel;
+    private AddMealFrame mealPanel;
 
-    public MealPanelController(JPanel centerPanel) {
-        mealPanel = new MealPanel();
+    public AddMealFrameController() {
+        mealPanel = new AddMealFrame();
 
         // list of ingredients to be added to the meal
         ArrayList<MealItem> mealItems = new ArrayList<>();
@@ -61,7 +60,5 @@ public class MealPanelController {
                 }
             });
         });
-
-        centerPanel.add(mealPanel, BorderLayout.CENTER);
     }
 }
