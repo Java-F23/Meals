@@ -49,6 +49,8 @@ public class FileHandler<T> {
                 T t = null;
 
                 while (fis.available() != 0) {
+                    // TODO: investigate this warning. throws classcastexception when adding a new meal to the file
+                    // classcastexception: class Ingredient$Nutrients cannot be cast to class java.io.ObjectStreamClass?
                     t = (T)ois.readObject();
                     list.add(t);
                 }

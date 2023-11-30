@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -18,20 +19,31 @@ public class ChefFrameController {
 
         chefFrame.getManageMeals().addActionListener(e -> {
             centerPanel.removeAll();
-            centerPanel.add(new JLabel("Welcome, " + Utils.getLoggedInUser().getName()), BorderLayout.NORTH);
-            centerPanel.add(new JLabel("This is the meals table"), BorderLayout.CENTER);
+            ManageMealsView manageMealsView = new ManageMealsView(centerPanel);
 
-            // Add the meals table
-            JScrollPane mealsTablePane = ChefPanelContent.generateMealsTable();
-            centerPanel.add(mealsTablePane, BorderLayout.CENTER);
+            manageMealsView.getAddMealButton().addActionListener(e1 -> new AddMealFrameController());
+            manageMealsView.getViewMealIngredientsButton().addActionListener(e1 -> {
+                // get the selected row
+                int selectedRow = manageMealsView.getMealTable().getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select a meal to view its ingredients");
+                } else {
+                    // get the meal name
+                    String mealName = (String) manageMealsView.getMealTable().getValueAt(selectedRow, 0);
+                    // get the meal
+                    Meal meal = Utils.getMealByName(mealName);
+                    if (meal == null) {
+                        JOptionPane.showMessageDialog(null, "Error fetching the Meal. Please try again later.");
+                        return;
+                    }
 
-            // Add view ingredient button actionlistener for each meal
-            ArrayList<JButton> viewIngredientButtons = new ArrayList<>();
+                    // get the items
+                    ArrayList<MealItem> mealItems = meal.getMealItems();
 
-            JButton addMeal = new JButton("Add Meal");
-            addMeal.addActionListener(e1 -> new AddMealFrameController());
-
-            centerPanel.add(addMeal, BorderLayout.SOUTH);
+                    // create a dialog to display the ingredients items
+                    MealItemsDialog mealItemsDialog = new MealItemsDialog(mealItems);
+                }
+            });
 
             centerPanel.revalidate();
             centerPanel.repaint();

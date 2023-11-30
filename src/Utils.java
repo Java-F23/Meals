@@ -274,4 +274,14 @@ public class Utils {
         loadFromFile(MEALS_FILE, meals);
         return meals;
     }
+
+    public static Meal getMealByName(String mealName) {
+        ArrayList<Meal> meals = getMeals();
+        for (Meal meal : meals) {
+            if (meal.getName().equals(mealName)) {
+                return meal;
+            }
+        }
+        return null;
+    }
 }
