@@ -18,25 +18,25 @@ public class Main {
         new WelcomeFrameController();
 
         // testing files
-        System.out.println("Chefs:");
-        for (Chef user : Utils.getChefs()) {
-            System.out.println(user);
-        }
-
-        System.out.println("Meal Preppers:");
-        for (MealPrepper user : Utils.getMealPreppers()) {
-            System.out.println(user);
-        }
-
-        System.out.println("Ingredients:");
-        for (Ingredient ingredient : Utils.getIngredients()) {
-            System.out.println(ingredient);
-        }
-
-        System.out.println("Meals:");
-        for (Meal meal : Utils.getMeals()) {
-            System.out.println(meal);
-        }
+//        System.out.println("Chefs:");
+//        for (Chef user : Utils.getChefs()) {
+//            System.out.println(user);
+//        }
+//
+//        System.out.println("Meal Preppers:");
+//        for (MealPrepper user : Utils.getMealPreppers()) {
+//            System.out.println(user);
+//        }
+//
+//        System.out.println("Ingredients:");
+//        for (Ingredient ingredient : Utils.getIngredients()) {
+//            System.out.println(ingredient);
+//        }
+//
+//        System.out.println("Meals:");
+//        for (Meal meal : Utils.getMeals()) {
+//            System.out.println(meal);
+//        }
 
 //        // Testing Edit
 //        ArrayList<Ingredient> ingredients = Utils.getIngredients();
