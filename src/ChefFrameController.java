@@ -19,6 +19,9 @@ public class ChefFrameController {
             centerPanel.removeAll();
             centerPanel.add(new JLabel("Welcome, " + Utils.getLoggedInUser().getName()), BorderLayout.NORTH);
             centerPanel.add(new JLabel("This is the meals table"), BorderLayout.CENTER);
+
+            MealPanelController mealPanelController = new MealPanelController(centerPanel);
+
             centerPanel.revalidate();
             centerPanel.repaint();
         });

@@ -4,7 +4,7 @@ public class Ingredient implements Serializable {
     // fields
     private String name;
     private final String chefName;
-    private float calories;
+    private Nutrients nutrients;
     private String unit;
     private String description;
     private boolean isVegetarian;
@@ -16,7 +16,7 @@ public class Ingredient implements Serializable {
     private boolean unspecifiedDietaryRestrictions;
 
     // constructor
-    public Ingredient(String name, String chefName, float calories, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) throws DuplicateError {
+    public Ingredient(String name, String chefName, Nutrients nutrients, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) throws DuplicateError {
         // check unique name
         for (Ingredient ingredient : Utils.getIngredients()) {
             if (ingredient.getName().equals(name)) {
@@ -26,7 +26,7 @@ public class Ingredient implements Serializable {
 
         this.name = name;
         this.chefName = chefName;
-        this.calories = calories;
+        this.nutrients = nutrients;
         this.unit = unit;
         this.description = description;
         this.isVegetarian = isVegetarian;
@@ -70,10 +70,6 @@ public class Ingredient implements Serializable {
         return chefName;
     }
 
-    public float getCalories() {
-        return calories;
-    }
-
     public String getUnit() {
         return unit;
     }
@@ -86,8 +82,8 @@ public class Ingredient implements Serializable {
         this.name = name;
     }
 
-    public void setCalories(float calories) {
-        this.calories = calories;
+    public void setNutrients(Nutrients nutrients) {
+        this.nutrients = nutrients;
     }
 
     public void setUnit(String unit) {
@@ -125,5 +121,9 @@ public class Ingredient implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public Nutrients getNutrients() {
+        return nutrients;
     }
 }

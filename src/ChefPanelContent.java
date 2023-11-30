@@ -11,6 +11,9 @@ public class ChefPanelContent {
         ingredientModel = new DefaultTableModel();
         ingredientModel.addColumn("Name");
         ingredientModel.addColumn("Calories");
+        ingredientModel.addColumn("Protein");
+        ingredientModel.addColumn("Fat");
+        ingredientModel.addColumn("Carbohydrates");
         ingredientModel.addColumn("Unit");
         ingredientModel.addColumn("Description");
         ingredientModel.addColumn("Vegetarian");
@@ -29,17 +32,23 @@ public class ChefPanelContent {
 
         // add rows to the table
         for (Ingredient ingredient : Utils.getIngredients()) {
-            ingredientModel.addRow(new Object[]{ingredient.getName(), ingredient.getCalories(), ingredient.getUnit(), ingredient.getDescription(), ingredient.isVegetarian(), ingredient.isVegan(), ingredient.isGlutenFree(), ingredient.isDairyFree(), ingredient.isNutFree(), ingredient.isRedMeatFree()});
+            ingredientModel.addRow(new Object[]{ingredient.getName(), ingredient.getNutrients().getCalories(), ingredient.getNutrients().getProtein(), ingredient.getNutrients().getFat(), ingredient.getNutrients().getCarbohydrates(), ingredient.getUnit(), ingredient.getDescription(), ingredient.isVegetarian(), ingredient.isVegan(), ingredient.isGlutenFree(), ingredient.isDairyFree(), ingredient.isNutFree(), ingredient.isRedMeatFree()});
         }
         return new JScrollPane(ingredientTable);
     }
 
-    private static JPanel ingredientDialog(JTextField nameField, JTextField caloriesField, JTextField unitField, JTextField descriptionField, JTextField isVegetarianField, JTextField isVeganField, JTextField isGlutenFreeField, JTextField isDairyFreeField, JTextField isNutFreeField, JTextField isRedMeatFreeField) {
+    private static JPanel ingredientDialog(JTextField nameField, JTextField caloriesField, JTextField proteinField, JTextField fatField, JTextField carbohydratesField, JTextField unitField, JTextField descriptionField, JTextField isVegetarianField, JTextField isVeganField, JTextField isGlutenFreeField, JTextField isDairyFreeField, JTextField isNutFreeField, JTextField isRedMeatFreeField) {
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(new JLabel("Name:"));
         panel.add(nameField);
         panel.add(new JLabel("Calories:"));
         panel.add(caloriesField);
+        panel.add(new JLabel("Protein:"));
+        panel.add(proteinField);
+        panel.add(new JLabel("Fat:"));
+        panel.add(fatField);
+        panel.add(new JLabel("Carbohydrates:"));
+        panel.add(carbohydratesField);
         panel.add(new JLabel("Unit:"));
         panel.add(unitField);
         panel.add(new JLabel("Description:"));
@@ -63,6 +72,9 @@ public class ChefPanelContent {
     private static void showAddIngredientDialog() {
         JTextField nameField = new JTextField();
         JTextField caloriesField = new JTextField();
+        JTextField proteinField = new JTextField();
+        JTextField fatField = new JTextField();
+        JTextField carbohydratesField = new JTextField();
         JTextField unitField = new JTextField();
         JTextField descriptionField = new JTextField();
         JTextField isVegetarianField = new JTextField();
@@ -72,7 +84,7 @@ public class ChefPanelContent {
         JTextField isNutFreeField = new JTextField();
         JTextField isRedMeatFreeField = new JTextField();
 
-        JPanel panel = ingredientDialog(nameField, caloriesField, unitField, descriptionField, isVegetarianField, isVeganField, isGlutenFreeField, isDairyFreeField, isNutFreeField, isRedMeatFreeField);
+        JPanel panel = ingredientDialog(nameField, caloriesField, proteinField, fatField, carbohydratesField, unitField, descriptionField, isVegetarianField, isVeganField, isGlutenFreeField, isDairyFreeField, isNutFreeField, isRedMeatFreeField);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Add New Ingredient",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -81,6 +93,9 @@ public class ChefPanelContent {
             try {
                 String name = nameField.getText();
                 float calories = Float.parseFloat(caloriesField.getText());
+                float protein = Float.parseFloat(proteinField.getText());
+                float fat = Float.parseFloat(fatField.getText());
+                float carbohydrates = Float.parseFloat(carbohydratesField.getText());
                 String unit = unitField.getText();
                 String description = descriptionField.getText();
                 boolean isVegetarian = Boolean.parseBoolean(isVegetarianField.getText());
@@ -91,10 +106,14 @@ public class ChefPanelContent {
                 boolean isRedMeatFree = Boolean.parseBoolean(isRedMeatFreeField.getText());
 
                 // Create a new Ingredient object and add it to the list
-                Ingredient newIngredient = new Ingredient(name, Utils.getLoggedInUser().getName(), calories, unit, description, isVegetarian, isVegan, isGlutenFree, isDairyFree, isNutFree, isRedMeatFree);
-                ingredientModel.addRow(new Object[]{newIngredient.getName(), newIngredient.getCalories(), newIngredient.getUnit(),
-                        newIngredient.getDescription(), newIngredient.getUnit(), newIngredient.isVegetarian(), newIngredient.isVegan(),
-                        newIngredient.isGlutenFree(), newIngredient.isDairyFree(), newIngredient.isNutFree(), newIngredient.isRedMeatFree()
+                Ingredient newIngredient = new Ingredient(name, Utils.getLoggedInUser().getName(), new Nutrients(calories, fat, carbohydrates, protein),
+                        unit, description, isVegetarian, isVegan, isGlutenFree, isDairyFree, isNutFree, isRedMeatFree);
+                ingredientModel.addRow(new Object[]{newIngredient.getName(), newIngredient.getNutrients().getCalories(),
+                        newIngredient.getNutrients().getProtein(), newIngredient.getNutrients().getFat(),
+                        newIngredient.getNutrients().getCarbohydrates(), newIngredient.getUnit(), newIngredient.getDescription(),
+                        newIngredient.getUnit(), newIngredient.isVegetarian(), newIngredient.isVegan(),
+                        newIngredient.isGlutenFree(), newIngredient.isDairyFree(), newIngredient.isNutFree(),
+                        newIngredient.isRedMeatFree()
                 });
 
                 // add the new ingredient to the file
@@ -127,7 +146,10 @@ public class ChefPanelContent {
             for (Ingredient ingredient : ingredients) {
                 if (ingredient.getName().equals(name)) {
                     JTextField nameField = new JTextField(ingredient.getName());
-                    JTextField caloriesField = new JTextField(String.valueOf(ingredient.getCalories()));
+                    JTextField caloriesField = new JTextField(String.valueOf(ingredient.getNutrients().getCalories()));
+                    JTextField proteinField = new JTextField(String.valueOf(ingredient.getNutrients().getProtein()));
+                    JTextField fatField = new JTextField(String.valueOf(ingredient.getNutrients().getFat()));
+                    JTextField carbohydratesField = new JTextField(String.valueOf(ingredient.getNutrients().getCarbohydrates()));
                     JTextField unitField = new JTextField(ingredient.getUnit());
                     JTextField descriptionField = new JTextField(ingredient.getDescription());
                     JTextField isVegetarianField = new JTextField(String.valueOf(ingredient.isVegetarian()));
@@ -137,7 +159,7 @@ public class ChefPanelContent {
                     JTextField isNutFreeField = new JTextField(String.valueOf(ingredient.isNutFree()));
                     JTextField isRedMeatFreeField = new JTextField(String.valueOf(ingredient.isRedMeatFree()));
 
-                    JPanel panel = ingredientDialog(nameField, caloriesField, unitField, descriptionField, isVegetarianField, isVeganField, isGlutenFreeField, isDairyFreeField, isNutFreeField, isRedMeatFreeField);
+                    JPanel panel = ingredientDialog(nameField, caloriesField, proteinField, fatField, carbohydratesField, unitField, descriptionField, isVegetarianField, isVeganField, isGlutenFreeField, isDairyFreeField, isNutFreeField, isRedMeatFreeField);
 
                     int result = JOptionPane.showConfirmDialog(null, panel, "Edit Ingredient",
                             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -146,7 +168,10 @@ public class ChefPanelContent {
                         // update the ingredient
                         try {
                             ingredient.setName(nameField.getText());
-                            ingredient.setCalories(Float.parseFloat(caloriesField.getText()));
+                            ingredient.getNutrients().setCalories(Float.parseFloat(caloriesField.getText()));
+                            ingredient.getNutrients().setProtein(Float.parseFloat(proteinField.getText()));
+                            ingredient.getNutrients().setFat(Float.parseFloat(fatField.getText()));
+                            ingredient.getNutrients().setCarbohydrates(Float.parseFloat(carbohydratesField.getText()));
                             ingredient.setUnit(unitField.getText());
                             ingredient.setDescription(descriptionField.getText());
                             ingredient.setVegetarian(Boolean.parseBoolean(isVegetarianField.getText()));
@@ -162,15 +187,18 @@ public class ChefPanelContent {
 
                         // update the table
                         ingredientModel.setValueAt(ingredient.getName(), selectedRow, 0);
-                        ingredientModel.setValueAt(ingredient.getCalories(), selectedRow, 1);
-                        ingredientModel.setValueAt(ingredient.getUnit(), selectedRow, 2);
-                        ingredientModel.setValueAt(ingredient.getDescription(), selectedRow, 3);
-                        ingredientModel.setValueAt(ingredient.isVegetarian(), selectedRow, 4);
-                        ingredientModel.setValueAt(ingredient.isVegan(), selectedRow, 5);
-                        ingredientModel.setValueAt(ingredient.isGlutenFree(), selectedRow, 6);
-                        ingredientModel.setValueAt(ingredient.isDairyFree(), selectedRow, 7);
-                        ingredientModel.setValueAt(ingredient.isNutFree(), selectedRow, 8);
-                        ingredientModel.setValueAt(ingredient.isRedMeatFree(), selectedRow, 9);
+                        ingredientModel.setValueAt(ingredient.getNutrients().getCalories(), selectedRow, 1);
+                        ingredientModel.setValueAt(ingredient.getNutrients().getProtein(), selectedRow, 2);
+                        ingredientModel.setValueAt(ingredient.getNutrients().getFat(), selectedRow, 3);
+                        ingredientModel.setValueAt(ingredient.getNutrients().getCarbohydrates(), selectedRow, 4);
+                        ingredientModel.setValueAt(ingredient.getUnit(), selectedRow, 5);
+                        ingredientModel.setValueAt(ingredient.getDescription(), selectedRow, 6);
+                        ingredientModel.setValueAt(ingredient.isVegetarian(), selectedRow, 7);
+                        ingredientModel.setValueAt(ingredient.isVegan(), selectedRow, 8);
+                        ingredientModel.setValueAt(ingredient.isGlutenFree(), selectedRow, 9);
+                        ingredientModel.setValueAt(ingredient.isDairyFree(), selectedRow, 10);
+                        ingredientModel.setValueAt(ingredient.isNutFree(), selectedRow, 11);
+                        ingredientModel.setValueAt(ingredient.isRedMeatFree(), selectedRow, 12);
 
                         // save the changes to the file
                         Utils.saveEditedToFile(ingredients, Utils.getIngredientsFile());

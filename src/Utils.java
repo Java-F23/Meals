@@ -201,16 +201,16 @@ public class Utils {
         saveToFile(new MealPrepper("Saleh", "ss@s.s", "saleh", "saleh", "01311111111"), MEAL_PREPPERS_FILE);
 
         // Ingredients
-        Ingredient salt = new Ingredient("Salt", "shady", 0, "g", "Salt is a mineral composed primarily of sodium chloride, a chemical compound belonging to the larger class of salts; salt in its natural form as a crystalline mineral is known as rock salt or halite.", true, true, true, true, true, true);
-        Ingredient cheese = new Ingredient("Cheese", "shady", 4.02f, "g", "Cheese is a dairy product derived from milk that is produced in a wide range of flavors, textures, and forms by coagulation of the milk protein casein.", true, false, true, false, true, true);
-        Ingredient lettuce = new Ingredient("Lettuce", "shady", 0.05f, "g", "Lettuce is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds.", true, true, true, true, true, true);
-        Ingredient tomato = new Ingredient("Tomato", "shady", 0.22f, "g", "The tomato is the edible, often red, berry of the plant Solanum lycopersicum, commonly known as a tomato plant.", true, true, true, true, true, true);
-        Ingredient flour = new Ingredient("Flour", "shady", 4.55f, "g", "Flour is a powder made by grinding raw grains, roots, beans, nuts, or seeds. Flours are used to make many different foods.", true, true, false, true, true, true);
-        Ingredient tomatoSauce = new Ingredient("Tomato Sauce", "shady", 0.80f, "g", "Tomato sauce, refers to any of a very large number of sauces made primarily from tomatoes, usually to be served as part of a dish.", true, true, true, true, true, true);
-        Ingredient mozzarella = new Ingredient("Mozzarella", "shady", 3.00f, "g", "Mozzarella is a traditionally southern Italian cheese made from Italian buffalo's milk by the pasta filata method.", true, false, true, false, true, true);
-        Ingredient pepperoni = new Ingredient("Pepperoni", "shady", 1.42f, "g", "Pepperoni, also known as pepperoni sausage, is an American variety of salami, usually made from cured pork and beef mixed together.", false, false, true, true, true, true);
-        Ingredient chicken = new Ingredient("Chicken", "shady", 2.39f, "g", "The chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.", false, false, true, true, true, true);
-        Ingredient beef = new Ingredient("Beef", "shady", 2.50f, "g", "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.", false, false, true, true, true, false);
+        Ingredient salt = new Ingredient("Salt", "shady", new Nutrients(0, 0, 0, 0), "g", "Salt is a mineral composed primarily of sodium chloride, a chemical compound belonging to the larger class of salts; salt in its natural form as a crystalline mineral is known as rock salt or halite.", true, true, true, true, true, true);
+        Ingredient cheese = new Ingredient("Cheese", "shady", new Nutrients(403f,25.4f, 33.82f, 1.28f), "g", "Cheese is a dairy product derived from milk that is produced in a wide range of flavors, textures, and forms by coagulation of the milk protein casein.", true, false, true, false, true, true);
+        Ingredient lettuce = new Ingredient("Lettuce", "shady", new Nutrients(15f, 0.15f, 1.36f, 0.15f), "g", "Lettuce is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds.", true, true, true, true, true, true);
+        Ingredient tomato = new Ingredient("Tomato", "shady", new Nutrients(18f, 0.88f, 3.89f, 0.2f), "g", "The tomato is the edible, often red, berry of the plant Solanum lycopersicum, commonly known as a tomato plant.", true, true, true, true, true, true);
+        Ingredient flour = new Ingredient("Flour", "shady", new Nutrients(3.52f, 0.44f, 0.15f, 0.01f), "g", "Flour is a powder made by grinding raw grains, roots, beans, nuts, or seeds. Flours are used to make many different foods.", true, true, false, true, true, true);
+        Ingredient tomatoSauce = new Ingredient("Tomato Sauce", "shady", new Nutrients(18f, 0.88f, 3.89f, 0.2f), "g", "Tomato sauce, refers to any of a very large number of sauces made primarily from tomatoes, usually to be served as part of a dish.", true, true, true, true, true, true);
+        Ingredient mozzarella = new Ingredient("Mozzarella", "shady", new Nutrients(300f, 22.2f, 22.2f, 1.5f), "g", "Mozzarella is a traditionally southern Italian cheese made from Italian buffalo's milk by the pasta filata method.", true, false, true, false, true, true);
+        Ingredient pepperoni = new Ingredient("Pepperoni", "shady", new Nutrients(500f,27.5f, 27.5f, 2.5f), "g", "Pepperoni, also known as pepperoni sausage, is an American variety of salami, usually made from cured pork and beef mixed together.", false, false, true, true, true, true);
+        Ingredient chicken = new Ingredient("Chicken", "shady", new Nutrients(239f, 27.3f, 0f, 14.1f), "g", "The chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.", false, false, true, true, true, true);
+        Ingredient beef = new Ingredient("Beef", "shady", new Nutrients(250f, 26.1f, 0f, 15.2f), "g", "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.", false, false, true, true, true, false);
 
         saveToFile(salt, INGREDIENTS_FILE);
         saveToFile(cheese, INGREDIENTS_FILE);
@@ -224,20 +224,27 @@ public class Utils {
         saveToFile(beef, INGREDIENTS_FILE);
 
         // Meals
-//        Meal salad = new Meal("Salad", "shady", new ArrayList<>(), 10, 0, "Mix all ingredients together.", "American");
-//        salad.addIngredient(salt, 10f);
-//        salad.addIngredient(cheese, 10f);
-//        salad.addIngredient(lettuce, 10f);
-//        salad.addIngredient(tomato, 10f);
-//        meals.add(salad);
-//
-//        Meal pizza = new Meal("Pizza", "shady", new ArrayList<>(), 30, 30, "gently shape the dough into a pizza circle, spread the tomato sauce on the dough, add the mozzarella and pepperoni, bake for 30 minutes at 350 degrees Fahrenheit.", "Italian");
-//        pizza.addIngredient(flour, 10f);
-//        pizza.addIngredient(tomatoSauce, 10f);
-//        pizza.addIngredient(mozzarella, 10f);
-//        pizza.addIngredient(cheese, 5f);
-//        pizza.addIngredient(pepperoni, 10f);
-//        meals.add(pizza);
+        Meal salad = new Meal("Salad", "shady", new ArrayList<>(), 10, 0, "Mix all ingredients together.", "American");
+        salad.addMealItem(new MealItem(salt, 10f));
+        salad.addMealItem(new MealItem(cheese, 10f));
+        salad.addMealItem(new MealItem(lettuce, 10f));
+        salad.addMealItem(new MealItem(tomato, 10f));
+
+        Meal pizza = new Meal("Pizza", "shady", new ArrayList<>(), 30, 30, "gently shape the dough into a pizza circle, spread the tomato sauce on the dough, add the mozzarella and pepperoni, bake for 30 minutes at 350 degrees Fahrenheit.", "Italian");
+        pizza.addMealItem(new MealItem(flour, 10f));
+        pizza.addMealItem(new MealItem(tomatoSauce, 10f));
+        pizza.addMealItem(new MealItem(mozzarella, 10f));
+        pizza.addMealItem(new MealItem(cheese, 5f));
+        pizza.addMealItem(new MealItem(pepperoni, 10f));
+
+        Meal pasta = new Meal("Pasta", "shady", new ArrayList<>(), 30, 30, "Salt water. Add pasta to water. Boil for 10 minutes then serve with beef and shredded cheese.", "Italian");
+        pasta.addMealItem(new MealItem(flour, 10f));
+        pasta.addMealItem(new MealItem(beef, 10f));
+        pasta.addMealItem(new MealItem(cheese, 5f));
+
+        saveToFile(salad, MEALS_FILE);
+        saveToFile(pizza, MEALS_FILE);
+        saveToFile(pasta, MEALS_FILE);
     }
 
     public static void addLogo(JPanel panel, int dimension) {
@@ -249,5 +256,22 @@ public class Utils {
         } catch (Exception e) {
             System.out.println("Error loading logo");
         }
+    }
+
+    public static Ingredient getIngredientByName(String ingredientName) {
+        ArrayList<Ingredient> ingredients = getIngredients();
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getName().equals(ingredientName)) {
+                return ingredient;
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Meal> getMeals() {
+        // load meals from file
+        ArrayList<Meal> meals = new ArrayList<>();
+        loadFromFile(MEALS_FILE, meals);
+        return meals;
     }
 }
