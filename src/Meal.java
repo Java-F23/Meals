@@ -12,7 +12,14 @@ public class Meal implements Serializable {
     private int bookmarkCount;
 //    private final ArrayList<Review> reviews;
 
-    public Meal(String name, String chefName, ArrayList<MealItem> mealItems, int preparationTime, int cookingTime, String instructions, String cuisine) {
+    public Meal(String name, String chefName, ArrayList<MealItem> mealItems, int preparationTime, int cookingTime, String instructions, String cuisine) throws DuplicateError {
+        // check unique name
+        for (Meal meal : Utils.getMeals()) {
+            if (meal.getName().equals(name)) {
+                throw new DuplicateError(name);
+            }
+        }
+
         this.name = name;
         this.chefName = chefName;
         this.mealItems = mealItems;

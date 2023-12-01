@@ -1,82 +1,15 @@
 import java.io.Serializable;
 
 public class Ingredient implements Serializable {
-    public static class Nutrients implements Serializable {
-        private float calories;
-        private float fat;
-        private float carbohydrates;
-        private float protein;
 
-        public Nutrients(float calories, float fat, float carbohydrates, float protein) {
-            this.calories = calories;
-            this.fat = fat;
-            this.carbohydrates = carbohydrates;
-            this.protein = protein;
-        }
 
-        public float getCalories() {
-            return calories;
-        }
-
-        public float getFat() {
-            return fat;
-        }
-
-        public float getCarbohydrates() {
-            return carbohydrates;
-        }
-
-        public float getProtein() {
-            return protein;
-        }
-
-        public void setCalories(float calories) {
-            this.calories = calories;
-        }
-
-        public void setFat(float fat) {
-            this.fat = fat;
-        }
-
-        public void setCarbohydrates(float carbohydrates) {
-            this.carbohydrates = carbohydrates;
-        }
-
-        public void setProtein(float protein) {
-            this.protein = protein;
-        }
-
-        public Nutrients add(Nutrients nutrients) {
-            this.calories += nutrients.getCalories();
-            this.fat += nutrients.getFat();
-            this.carbohydrates += nutrients.getCarbohydrates();
-            this.protein += nutrients.getProtein();
-            return this;
-        }
-
-        public Nutrients multiply(float multiplier) {
-            this.calories *= multiplier;
-            this.fat *= multiplier;
-            this.carbohydrates *= multiplier;
-            this.protein *= multiplier;
-            return this;
-        }
-
-        @Override
-        public String toString() {
-            return "Nutrients{" +
-                    "calories=" + calories +
-                    ", fat=" + fat +
-                    ", carbohydrates=" + carbohydrates +
-                    ", protein=" + protein +
-                    '}';
-        }
-    }
-    // fields
     private String name;
     private final String chefName;
-    private Nutrients nutrients;
     private String unit;
+    private float calories;
+    private float fat;
+    private float carbohydrates;
+    private float protein;
     private String description;
     private boolean isVegetarian;
     private boolean isVegan;
@@ -87,7 +20,7 @@ public class Ingredient implements Serializable {
     private boolean unspecifiedDietaryRestrictions;
 
     // constructor
-    public Ingredient(String name, String chefName, Nutrients nutrients, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) throws DuplicateError {
+    public Ingredient(String name, String chefName, float calories, float protein, float carbohydrates, float fat, String unit, String description, boolean isVegetarian, boolean isVegan, boolean isGlutenFree, boolean isDairyFree, boolean isNutFree, boolean isRedMeatFree) throws DuplicateError {
         // check unique name
         for (Ingredient ingredient : Utils.getIngredients()) {
             if (ingredient.getName().equals(name)) {
@@ -97,7 +30,10 @@ public class Ingredient implements Serializable {
 
         this.name = name;
         this.chefName = chefName;
-        this.nutrients = nutrients;
+        this.calories = calories;
+        this.protein = protein;
+        this.carbohydrates = carbohydrates;
+        this.fat = fat;
         this.unit = unit;
         this.description = description;
         this.isVegetarian = isVegetarian;
@@ -153,10 +89,6 @@ public class Ingredient implements Serializable {
         this.name = name;
     }
 
-    public void setNutrients(Nutrients nutrients) {
-        this.nutrients = nutrients;
-    }
-
     public void setUnit(String unit) {
         this.unit = unit;
     }
@@ -194,7 +126,36 @@ public class Ingredient implements Serializable {
         return name;
     }
 
-    public Nutrients getNutrients() {
-        return nutrients;
+
+    public float getCalories() {
+        return calories;
+    }
+
+    public float getFat() {
+        return fat;
+    }
+
+    public float getCarbohydrates() {
+        return carbohydrates;
+    }
+
+    public float getProtein() {
+        return protein;
+    }
+
+    public void setCalories(float calories) {
+        this.calories = calories;
+    }
+
+    public void setFat(float fat) {
+        this.fat = fat;
+    }
+
+    public void setCarbohydrates(float carbohydrates) {
+        this.carbohydrates = carbohydrates;
+    }
+
+    public void setProtein(float protein) {
+        this.protein = protein;
     }
 }
