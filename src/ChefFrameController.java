@@ -21,7 +21,7 @@ public class ChefFrameController {
             centerPanel.removeAll();
             ManageMealsView manageMealsView = new ManageMealsView(centerPanel);
 
-            manageMealsView.getAddMealButton().addActionListener(e1 -> new AddMealFrameController());
+            manageMealsView.getAddMealButton().addActionListener(e1 -> new AddMealFrameController(manageMealsView.getMealModel()));
             manageMealsView.getViewMealIngredientsButton().addActionListener(e1 -> {
                 // get the selected row
                 int selectedRow = manageMealsView.getMealTable().getSelectedRow();

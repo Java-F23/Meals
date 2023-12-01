@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class ManageMealsView {
@@ -54,5 +55,9 @@ public class ManageMealsView {
 
     public JTable getMealTable() {
         return mealTable;
+    }
+
+    public DefaultTableModel getMealModel() {
+        return (DefaultTableModel) mealTable.getModel();
     }
 }

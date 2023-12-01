@@ -4,31 +4,39 @@ import java.util.ArrayList;
 
 public class AddMealFrameController {
     // this class will handle the logic for the MealPanel class which is used to add a meal recipe by the chef
-    private AddMealFrame mealPanel;
+    private AddMealFrame addMealFrame;
 
-    public AddMealFrameController() {
-        mealPanel = new AddMealFrame();
+    public AddMealFrameController(DefaultTableModel mealModel) {
+        addMealFrame = new AddMealFrame();
 
         // list of ingredients to be added to the meal
         ArrayList<MealItem> mealItems = new ArrayList<>();
 
-        mealPanel.getAddMealButton().addActionListener(e -> {
+        addMealFrame.getAddMealButton().addActionListener(e -> {
             try {
-                String name = mealPanel.getNameFieldText();
-                String cuisine = mealPanel.getCuisineFieldText();
-                int prepTime = Integer.parseInt(mealPanel.getPrepTimeFieldText());
-                int cookTime = Integer.parseInt(mealPanel.getCookTimeFieldText());
-                String instructions = mealPanel.getInstructionsAreaText();
+                String name = addMealFrame.getNameFieldText();
+                String cuisine = addMealFrame.getCuisineFieldText();
+                int prepTime = Integer.parseInt(addMealFrame.getPrepTimeFieldText());
+                int cookTime = Integer.parseInt(addMealFrame.getCookTimeFieldText());
+                String instructions = addMealFrame.getInstructionsAreaText();
 
                 Meal meal = new Meal(name, Utils.getLoggedInUser().getName(), mealItems, prepTime, cookTime, instructions, cuisine);
                 Utils.saveToFile(meal, Utils.getMealsFile());
                 JOptionPane.showMessageDialog(null, "Meal added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                // close the frame
+                addMealFrame.dispose();
+
+                // refresh the meals table
+                mealModel.addRow(new Object[]{meal.getName(), meal.getChefName(), meal.getPreparationTime(), meal.getCookingTime(), meal.getInstructions(), meal.getCuisine(), meal.getBookmarkCount()});
+            } catch (DuplicateError ex) {
+                JOptionPane.showMessageDialog(null, "Meal already exists", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Invalid input", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        mealPanel.getAddIngredientsButton().addActionListener(e -> {
+        addMealFrame.getAddIngredientsButton().addActionListener(e -> {
             // pop up window that contains the ingredients table, an input field for the quantity and a button to add the ingredient to the meal
             AddMealIngredientsFrame ingredientsFrame = new AddMealIngredientsFrame();
 
@@ -46,7 +54,7 @@ public class AddMealFrameController {
                         mealItems.add(mealItem);
 
                         // update the chosenIngredients table
-                        DefaultTableModel tableModel = (DefaultTableModel) mealPanel.getChosenIngredientsTable().getModel();
+                        DefaultTableModel tableModel = (DefaultTableModel) addMealFrame.getChosenIngredientsTable().getModel();
                         tableModel.addRow(new Object[]{ingredient.getName(), quantity, ingredient.getUnit()});
 
                         JOptionPane.showMessageDialog(null, "Ingredient added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
