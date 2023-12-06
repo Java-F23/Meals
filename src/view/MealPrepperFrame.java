@@ -1,5 +1,6 @@
 package view;
 import helper.Utils;
+import helper.paths;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +47,7 @@ public class MealPrepperFrame extends JFrame {
             JPanel logoPanel = new JPanel();
             logoPanel.setLayout(new BorderLayout());
             logoPanel.setPreferredSize(new Dimension(sideBarWidth, navBarHeight));
-            Utils.addLogo(logoPanel, "../cookeaseSmall.png", navBarHeight);
+            Utils.addLogo(logoPanel, paths.LOGO_SMALL.getPath(), navBarHeight);
             logoPanel.setBackground(Color.GRAY);
 
             add(logoPanel, BorderLayout.WEST);

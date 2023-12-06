@@ -18,27 +18,6 @@ public class Utils {
     // logged in user
     private static User loggedInUser = null;
 
-    private static final String CHEFS_FILE = "chefs.ser";
-    private static final String MEAL_PREPPERS_FILE = "mealPreppers.ser";
-    private static final String INGREDIENTS_FILE = "ingredients.ser";
-    private static final String MEALS_FILE = "meals.ser";
-
-    public static String getChefsFile() {
-        return CHEFS_FILE;
-    }
-
-    public static String getMealPreppersFile() {
-        return MEAL_PREPPERS_FILE;
-    }
-
-    public static String getIngredientsFile() {
-        return INGREDIENTS_FILE;
-    }
-
-    public static String getMealsFile() {
-        return MEALS_FILE;
-    }
-
     public static void saveToFile(Serializable object, String fileName) {
         // use FileHandler class to save object to file
         FileHandler<Serializable> fileHandler = new FileHandler<>(fileName);
@@ -83,8 +62,8 @@ public class Utils {
 
         // username must be unique (no duplicates) in users list
         ArrayList<User> users = new ArrayList<>();
-        loadFromFile(CHEFS_FILE, users);
-        loadFromFile(MEAL_PREPPERS_FILE, users);
+        loadFromFile(paths.CHEFS.getPath(), users);
+        loadFromFile(paths.MEAL_PREPPERS.getPath(), users);
 
         for (User u : users) {
             if (u.getUsername().equals(username)) {
@@ -104,10 +83,10 @@ public class Utils {
 
         if (role.equalsIgnoreCase("Chef")) {
             Chef chef = new Chef(name, email, username, password, phone);
-            saveToFile(chef, CHEFS_FILE);
+            saveToFile(chef, paths.CHEFS.getPath());
         } else if (role.equalsIgnoreCase("User")) {
             MealPrepper mealPrepper = new MealPrepper(name, email, username, password, phone);
-            saveToFile(mealPrepper, MEAL_PREPPERS_FILE);
+            saveToFile(mealPrepper, paths.MEAL_PREPPERS.getPath());
         } else {
             throw new IllegalArgumentException("Invalid role");
         }
@@ -180,29 +159,29 @@ public class Utils {
     public static ArrayList<Chef> getChefs() {
         // load chefs from file
         ArrayList<Chef> chefs = new ArrayList<>();
-        loadFromFile(CHEFS_FILE, chefs);
+        loadFromFile(paths.CHEFS.getPath(), chefs);
         return chefs;
     }
 
     public static ArrayList<MealPrepper> getMealPreppers() {
         // load meal preppers from file
         ArrayList<MealPrepper> mealPreppers = new ArrayList<>();
-        loadFromFile(MEAL_PREPPERS_FILE, mealPreppers);
+        loadFromFile(paths.MEAL_PREPPERS.getPath(), mealPreppers);
         return mealPreppers;
     }
 
     public static ArrayList<Ingredient> getIngredients() {
         // load ingredients from file
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        loadFromFile(INGREDIENTS_FILE, ingredients);
+        loadFromFile(paths.INGREDIENTS.getPath(), ingredients);
         return ingredients;
     }
 
     public static void initializeData() throws DuplicateError {
         // users
-        saveToFile(new Chef("Shady", "s@s.s", "shady", "shady", "01111111111"), CHEFS_FILE);
-        saveToFile(new Chef("Youssef", "y@y.y", "youssef", "youssef", "01211111111"), CHEFS_FILE);
-        saveToFile(new MealPrepper("Saleh", "ss@s.s", "saleh", "saleh", "01311111111"), MEAL_PREPPERS_FILE);
+        saveToFile(new Chef("Shady", "s@s.s", "shady", "shady", "01111111111"), paths.CHEFS.getPath());
+        saveToFile(new Chef("Youssef", "y@y.y", "youssef", "youssef", "01211111111"), paths.CHEFS.getPath());
+        saveToFile(new MealPrepper("Saleh", "ss@s.s", "saleh", "saleh", "01311111111"), paths.MEAL_PREPPERS.getPath());
 
         // Ingredients
         Ingredient salt = new Ingredient("Salt", "shady", 0, 0, 0, 0, "g", "Salt is a mineral composed primarily of sodium chloride, a chemical compound belonging to the larger class of salts; salt in its natural form as a crystalline mineral is known as rock salt or halite.", true, true, true, true, true, true);
@@ -216,16 +195,16 @@ public class Utils {
         Ingredient chicken = new Ingredient("Chicken", "shady", 239f, 27.3f, 0f, 14.1f, "g", "The chicken is a type of domesticated fowl, a subspecies of the red junglefowl. It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011.", false, false, true, true, true, true);
         Ingredient beef = new Ingredient("Beef", "shady", 250f, 26.1f, 0f, 15.2f, "g", "Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.", false, false, true, true, true, false);
 
-        saveToFile(salt, INGREDIENTS_FILE);
-        saveToFile(cheese, INGREDIENTS_FILE);
-        saveToFile(lettuce, INGREDIENTS_FILE);
-        saveToFile(tomato, INGREDIENTS_FILE);
-        saveToFile(flour, INGREDIENTS_FILE);
-        saveToFile(tomatoSauce, INGREDIENTS_FILE);
-        saveToFile(mozzarella, INGREDIENTS_FILE);
-        saveToFile(pepperoni, INGREDIENTS_FILE);
-        saveToFile(chicken, INGREDIENTS_FILE);
-        saveToFile(beef, INGREDIENTS_FILE);
+        saveToFile(salt, paths.INGREDIENTS.getPath());
+        saveToFile(cheese, paths.INGREDIENTS.getPath());
+        saveToFile(lettuce, paths.INGREDIENTS.getPath());
+        saveToFile(tomato, paths.INGREDIENTS.getPath());
+        saveToFile(flour, paths.INGREDIENTS.getPath());
+        saveToFile(tomatoSauce, paths.INGREDIENTS.getPath());
+        saveToFile(mozzarella, paths.INGREDIENTS.getPath());
+        saveToFile(pepperoni, paths.INGREDIENTS.getPath());
+        saveToFile(chicken, paths.INGREDIENTS.getPath());
+        saveToFile(beef, paths.INGREDIENTS.getPath());
 
         // Meals
         Meal salad = new Meal("Salad", "shady", new HashMap<>(), 10, 0, "Mix all ingredients together.", "American");
@@ -246,9 +225,9 @@ public class Utils {
         pasta.addIngredient(beef, 10f);
         pasta.addIngredient(cheese, 25f);
 
-        saveToFile(salad, MEALS_FILE);
-        saveToFile(pizza, MEALS_FILE);
-        saveToFile(pasta, MEALS_FILE);
+        saveToFile(salad, paths.MEALS.getPath());
+        saveToFile(pizza, paths.MEALS.getPath());
+        saveToFile(pasta, paths.MEALS.getPath());
     }
 
     public static void addLogo(JPanel panel, String source, int dimension) {
@@ -275,7 +254,7 @@ public class Utils {
     public static ArrayList<Meal> getMeals() {
         // load meals from file
         ArrayList<Meal> meals = new ArrayList<>();
-        loadFromFile(MEALS_FILE, meals);
+        loadFromFile(paths.MEALS.getPath(), meals);
         return meals;
     }
 

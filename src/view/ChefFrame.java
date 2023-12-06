@@ -1,5 +1,6 @@
 package view;
 import helper.Utils;
+import helper.paths;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +46,7 @@ public class ChefFrame extends JFrame {
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         centerPanel.add(new JLabel("Welcome, " + Utils.getLoggedInUser().getName()), BorderLayout.NORTH);
 
-        Utils.addLogo(centerPanel, "../cookease.png", 150);
+        Utils.addLogo(centerPanel, paths.LOGO.getPath(), 150);
 
         add(centerPanel, BorderLayout.CENTER);
 

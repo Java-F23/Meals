@@ -1,7 +1,7 @@
 import controller.WelcomeFrameController;
 import helper.DuplicateError;
 import helper.Utils;
-
+import helper.paths;
 import model.*;
 
 import java.io.File;
@@ -12,7 +12,7 @@ public class Main {
         // run first time setup
         try {
             // if files don't exist, call initializeData()
-            if (!new File("chefs.ser").exists()) {
+            if (!new File(paths.CHEFS.getPath()).exists()) {
                 Utils.initializeData();
             }
         } catch (DuplicateError e) {
