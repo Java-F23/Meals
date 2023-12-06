@@ -30,15 +30,10 @@ public class MealPrepperFrame extends JFrame {
     private JButton mealPlanHistoryButton;
 
     JButton logoutButton;
-    private final int width = 1000;
+    private final int width = 1200;
     private final int height = 600;
     private final int navBarHeight = 50;
     private final int sideBarWidth = 200;
-
-    public void setBookmarkedMealsPanel(BrowseMealsPanel browseMealsPanel) {
-        this.bookmarkedMealsPanel = browseMealsPanel;
-    }
-
 
     public class HeaderPanel extends JPanel {
         public HeaderPanel() {

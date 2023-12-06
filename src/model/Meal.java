@@ -85,11 +85,21 @@ public class Meal implements Serializable {
     }
 
     public void incrementBookmarkCount() {
+        ArrayList<Meal> meals = Utils.getMeals();
+        // remove meal using name
+        meals.removeIf(meal -> meal.getName().equals(this.getName()));
         bookmarkCount++;
+        meals.add(this);
+        Utils.saveEditedToFile(meals, paths.MEALS.getPath());
     }
 
     public void decrementBookmarkCount() {
+        ArrayList<Meal> meals = Utils.getMeals();
+        // remove meal using name
+        meals.removeIf(meal -> meal.getName().equals(this.getName()));
         bookmarkCount--;
+        meals.add(this);
+        Utils.saveEditedToFile(meals, paths.MEALS.getPath());
     }
 
     @Override

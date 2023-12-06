@@ -41,6 +41,7 @@ public class Main {
         System.out.println("Meals:");
         for (Meal meal : Utils.getMeals()) {
             System.out.println(meal);
+            System.out.println("Bookmarks: " + meal.getBookmarkCount());
         }
 
 //        // Testing Edit

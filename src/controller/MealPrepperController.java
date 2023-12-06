@@ -17,8 +17,7 @@ public class MealPrepperController {
 
     public MealPrepperController() {
         mpf = new MealPrepperFrame();
-        new BrowseMealsController(mpf.getBrowseMealsPanel());
-        new BrowseMealsController(mpf.getBookmarkedMealsPanel());
+        new BrowseMealsController(mpf.getBrowseMealsPanel(), mpf.getBookmarkedMealsPanel());
 //        new CurrentMealPlanController(mpf.getCurrentMealPlanPanel());
 //        new ShoppingListController(mpf.getShoppingListPanel());
 //        new MealPlanHistoryController(mpf.getMealPlanHistoryPanel());
@@ -35,11 +34,6 @@ public class MealPrepperController {
             mpf.getCardLayout().show(mpf.getMainPanel(), mpf.getMainPanel().getShoppingListPanelName());
         });
         mpf.getSideMenuPanel().getBookmarkedMealsButton().addActionListener(e -> {
-            // refresh the bookmarked meals panel
-            mpf.getMainPanel().removeBookmarkedMealsPanel();
-            mpf.setBookmarkedMealsPanel(new BrowseMealsPanel(((MealPrepper) Utils.getLoggedInUser()).getBookmarkedMeals()));
-            new BrowseMealsController(mpf.getBookmarkedMealsPanel());
-            mpf.getMainPanel().add(mpf.getBookmarkedMealsPanel(), mpf.getMainPanel().getBookmarkedMealsPanelName());
             mpf.getCardLayout().show(mpf.getMainPanel(), mpf.getMainPanel().getBookmarkedMealsPanelName());
         });
         mpf.getSideMenuPanel().getMealPlanHistoryButton().addActionListener(e -> {

@@ -3,6 +3,7 @@ import model.*;
 import helper.Utils;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,71 +11,92 @@ import java.util.List;
 
 public class BrowseMealsPanel extends JPanel {
     // The BrowseMealsPanel class is a panel that displays all the meals that are available to the user.
-    // the list of meals will be displayed in a vertical scrollable list
+    // the panel will have a table of meals. there will be a panel of buttons at the bottom of the table that will allow the user to add the meal to their bookmarked meals, add the meal to their current meal plan, or view the ingredients of the meal
 
-    // list of meals with their corresponding buttons
-
-    HashSet<Meal> meals;
-    private HashMap<Meal, JComponent[]> mealButtons;
-
+    private JButton addMealToBookmarkedMealsButton;
+    private JButton removeMealFromBookmarkedMealsButton;
+    private JButton addMealToCurrentMealPlanButton;
+    private JButton viewMealIngredientsButton;
+    private JTable mealTable;
+    private HashMap<Integer, Meal> mealMap;
+    private HashSet<Meal> meals;
     public BrowseMealsPanel(HashSet<Meal> meals) {
-        mealButtons = new HashMap<>();
-
+        this.meals = meals;
+        mealMap = new HashMap<>();
         setLayout(new BorderLayout());
-        JLabel label = new JLabel("Browse Meals");
-        add(label, BorderLayout.NORTH);
+        setBackground(Color.GRAY);
 
-        JPanel mealListPanel = new JPanel(new GridLayout(0, 1));
+        // Add the meals table
+        DefaultTableModel mealModel = new DefaultTableModel();
+        mealModel.addColumn("Name");
+        mealModel.addColumn("Chef");
+        mealModel.addColumn("Prep Time");
+        mealModel.addColumn("Cook Time");
+        mealModel.addColumn("Instructions");
+        mealModel.addColumn("Cuisine");
+        mealModel.addColumn("# Bookmarks");
 
-        // for each meal, add a label that says the meal name
-        // for each meal, add a button that says "View Ingredients"
-        // for each meal, add a button that says "View Details"
-        // for each meal, add a button that says "Add to Meal Plan"
+        mealTable = new JTable(mealModel);
+        mealTable.setDefaultEditor(Object.class, null);
+
+        mealTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        mealTable.setFillsViewportHeight(true);
+
+        // add rows to the table
+        int i = 0;
         for (Meal meal : meals) {
-            JPanel mealPanel = new JPanel(new FlowLayout());
-
-            JLabel mealNameLabel = new JLabel(meal.getName());
-            mealPanel.add(mealNameLabel);
-
-            JButton viewIngredientsButton = new JButton("View Ingredients");
-            mealPanel.add(viewIngredientsButton);
-
-            JButton viewDetailsButton = new JButton("View Details");
-            mealPanel.add(viewDetailsButton);
-
-            JButton addToMealPlanButton = new JButton("Add to Meal Plan");
-            mealPanel.add(addToMealPlanButton);
-
-            JButton addToShoppingListButton = new JButton("Add to Shopping List");
-            addToShoppingListButton.setToolTipText("Add all ingredients to shopping list without affecting meal plan");
-            mealPanel.add(addToShoppingListButton);
-
-            // bookmark checkbutton
-            JCheckBox bookmarkButton = new JCheckBox("Bookmark");
-            // if the meal is bookmarked, set the checkbox to selected
-            if (((MealPrepper) Utils.getLoggedInUser()).getBookmarkedMeals().contains(meal)) {
-                bookmarkButton.setSelected(true);
-            }
-
-            mealPanel.add(bookmarkButton);
-
-            JButton reviewButton = new JButton("Review");
-            mealPanel.add(reviewButton);
-
-            mealListPanel.add(mealPanel);
-
-            // add the meal and its buttons to the hashmap
-            mealButtons.put(meal, new JComponent[]{viewIngredientsButton, viewDetailsButton, addToMealPlanButton, addToShoppingListButton, bookmarkButton, reviewButton});
+            mealModel.addRow(new Object[]{meal.getName(), meal.getChefName(), meal.getPreparationTime(), meal.getCookingTime(), meal.getInstructions(), meal.getCuisine(), meal.getBookmarkCount()});
+            mealMap.put(i, meal);
+            i++;
         }
 
-        add(new JScrollPane(mealListPanel), BorderLayout.CENTER);
+        JScrollPane mealsTablePane = new JScrollPane(mealTable);
+        add(mealsTablePane, BorderLayout.CENTER);
+
+        // Add the buttons panel
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        addMealToBookmarkedMealsButton = new JButton("Add to Bookmarked Meals");
+        removeMealFromBookmarkedMealsButton = new JButton("Remove from Bookmarked Meals");
+        addMealToCurrentMealPlanButton = new JButton("Add to Current Meal Plan");
+        viewMealIngredientsButton = new JButton("View Ingredients");
+
+        buttonsPanel.add(addMealToBookmarkedMealsButton);
+        buttonsPanel.add(removeMealFromBookmarkedMealsButton);
+        buttonsPanel.add(addMealToCurrentMealPlanButton);
+        buttonsPanel.add(viewMealIngredientsButton);
+
+        add(buttonsPanel, BorderLayout.SOUTH);
     }
 
-    public void setMeals(HashSet<Meal> meals) {
-        this.meals = meals;
+    public JButton getAddMealToBookmarkedMealsButton() {
+        return addMealToBookmarkedMealsButton;
     }
 
-    public HashMap<Meal, JComponent[]> getMealButtons() {
-        return mealButtons;
+    public JButton getRemoveMealFromBookmarkedMealsButton() {
+        return removeMealFromBookmarkedMealsButton;
+    }
+
+    public JButton getAddMealToCurrentMealPlanButton() {
+        return addMealToCurrentMealPlanButton;
+    }
+
+    public JButton getViewMealIngredientsButton() {
+        return viewMealIngredientsButton;
+    }
+
+    public JTable getMealTable() {
+        return mealTable;
+    }
+
+    public DefaultTableModel getMealModel() {
+        return (DefaultTableModel) mealTable.getModel();
+    }
+
+    public HashMap<Integer, Meal> getMealMap() {
+        return mealMap;
+    }
+
+    public HashSet<Meal> getMeals() {
+        return meals;
     }
 }
