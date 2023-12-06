@@ -120,7 +120,7 @@ public class ChefPanelContent {
                 });
 
                 // add the new ingredient to the file
-                Utils.saveToFile(newIngredient, Utils.getIngredientsFile());
+                Utils.saveToFile(newIngredient, paths.INGREDIENTS.getPath());
             } catch (DuplicateError e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
                 return;
@@ -204,7 +204,7 @@ public class ChefPanelContent {
                         ingredientModel.setValueAt(ingredient.isRedMeatFree(), selectedRow, 12);
 
                         // save the changes to the file
-                        Utils.saveEditedToFile(ingredients, Utils.getIngredientsFile());
+                        Utils.saveEditedToFile(ingredients, paths.INGREDIENTS.getPath());
                     }
                 }
             }
@@ -237,7 +237,7 @@ public class ChefPanelContent {
                 }
             }
             ingredientModel.removeRow(selectedRow);
-            Utils.saveEditedToFile(ingredients, Utils.getIngredientsFile());
+            Utils.saveEditedToFile(ingredients, paths.INGREDIENTS.getPath());
         });
         return deleteIngredientButton;
     }

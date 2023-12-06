@@ -27,7 +27,7 @@ public class AddMealFrameController {
                 String instructions = addMealFrame.getInstructionsAreaText();
 
                 Meal meal = new Meal(name, Utils.getLoggedInUser().getName(), mealIngredients, prepTime, cookTime, instructions, cuisine);
-                Utils.saveToFile(meal, Utils.getMealsFile());
+                Utils.saveToFile(meal, paths.MEALS.getPath());
                 JOptionPane.showMessageDialog(null, "Meal added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
 
                 // close the frame
