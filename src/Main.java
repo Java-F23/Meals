@@ -1,5 +1,10 @@
+import controller.WelcomeFrameController;
+import helper.DuplicateError;
+import helper.Utils;
+
+import model.*;
+
 import java.io.File;
-import java.util.ArrayList;
 
 // This project uses the MVC design pattern
 public class Main {
@@ -18,21 +23,21 @@ public class Main {
         new WelcomeFrameController();
 
         // testing files
-//        System.out.println("Chefs:");
-//        for (Chef user : Utils.getChefs()) {
-//            System.out.println(user);
-//        }
-//
-//        System.out.println("Meal Preppers:");
-//        for (MealPrepper user : Utils.getMealPreppers()) {
-//            System.out.println(user);
-//        }
-//
-//        System.out.println("Ingredients:");
-//        for (Ingredient ingredient : Utils.getIngredients()) {
-//            System.out.println(ingredient);
-//        }
-//
+        System.out.println("Chefs:");
+        for (Chef user : Utils.getChefs()) {
+            System.out.println(user);
+        }
+
+        System.out.println("Meal Preppers:");
+        for (MealPrepper user : Utils.getMealPreppers()) {
+            System.out.println(user);
+        }
+
+        System.out.println("Ingredients:");
+        for (Ingredient ingredient : Utils.getIngredients()) {
+            System.out.println(ingredient);
+        }
+
         System.out.println("Meals:");
         for (Meal meal : Utils.getMeals()) {
             System.out.println(meal);
