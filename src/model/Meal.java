@@ -97,34 +97,27 @@ public class Meal implements Serializable {
     }
 
     public Float getTotalCalories() {
-        float totalCalories = 0f;
-        for (Ingredient ingredient : ingredients.keySet()) {
-            totalCalories += ingredient.getCalories() * ingredients.get(ingredient);
-        }
-        return totalCalories;
+        // calculate total calories using stream
+        return ingredients.keySet().stream()
+                .map(ingredient -> ingredient.getCalories() * ingredients.get(ingredient))
+                .reduce(0f, Float::sum);
     }
 
     public Float getTotalFat() {
-        float totalFat = 0f;
-        for (Ingredient ingredient : ingredients.keySet()) {
-            totalFat += ingredient.getFat() * ingredients.get(ingredient);
-        }
-        return totalFat;
+        return ingredients.keySet().stream()
+                .map(ingredient -> ingredient.getFat() * ingredients.get(ingredient))
+                .reduce(0f, Float::sum);
     }
 
     public Float getTotalCarbohydrates() {
-        float totalCarbohydrates = 0f;
-        for (Ingredient ingredient : ingredients.keySet()) {
-            totalCarbohydrates += ingredient.getCarbohydrates() * ingredients.get(ingredient);
-        }
-        return totalCarbohydrates;
+        return ingredients.keySet().stream()
+                .map(ingredient -> ingredient.getCarbohydrates() * ingredients.get(ingredient))
+                .reduce(0f, Float::sum);
     }
 
     public Float getTotalProtein() {
-        float totalProtein = 0f;
-        for (Ingredient ingredient : ingredients.keySet()) {
-            totalProtein += ingredient.getProtein() * ingredients.get(ingredient);
-        }
-        return totalProtein;
+        return ingredients.keySet().stream()
+                .map(ingredient -> ingredient.getProtein() * ingredients.get(ingredient))
+                .reduce(0f, Float::sum);
     }
 }
