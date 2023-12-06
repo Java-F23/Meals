@@ -10,8 +10,11 @@ https://chat.openai.com/share/3b8530c5-37fd-44b5-8a7d-4a4bc7c524d5
 https://chat.openai.com/share/c5fe48c1-8a2e-41c1-81b3-90f7936f5817
 
 ##### Sprint 3 update
-- changed structure of the program to be more object oriented
+- changed the structure of the program to be more object oriented by separating functionality of chef and meal prepper
 - used MVC design pattern
 - switched from using lists to files to store data
 - used templates to handle storing data to files with different classes using the same function
 - corrected mentioned comments on sprint 2
+- used enums for file paths
+- used collections such as HashSets, Hashmaps and removed unnecessary class (mealItems)
+- separated all views, models, and controllers into their own packages
