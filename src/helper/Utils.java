@@ -232,7 +232,8 @@ public class Utils {
 
     public static void addLogo(JPanel panel, String source, int dimension) {
         try {
-            ImageIcon logo = new ImageIcon(Objects.requireNonNull(Utils.class.getResource(source)));
+            File file = new File(source);
+            ImageIcon logo = new ImageIcon(Objects.requireNonNull(file.getAbsolutePath()));
             JLabel logoLabel = new JLabel(logo);
             logoLabel.setPreferredSize(new Dimension(dimension, dimension));
             panel.add(logoLabel, BorderLayout.CENTER);
