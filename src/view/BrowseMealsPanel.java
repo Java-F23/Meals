@@ -5,6 +5,7 @@ import helper.Utils;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class BrowseMealsPanel extends JPanel {
@@ -12,9 +13,11 @@ public class BrowseMealsPanel extends JPanel {
     // the list of meals will be displayed in a vertical scrollable list
 
     // list of meals with their corresponding buttons
+
+    HashSet<Meal> meals;
     private HashMap<Meal, JComponent[]> mealButtons;
 
-    public BrowseMealsPanel() {
+    public BrowseMealsPanel(HashSet<Meal> meals) {
         mealButtons = new HashMap<>();
 
         setLayout(new BorderLayout());
@@ -22,8 +25,7 @@ public class BrowseMealsPanel extends JPanel {
         add(label, BorderLayout.NORTH);
 
         JPanel mealListPanel = new JPanel(new GridLayout(0, 1));
-        // list of meals
-        List<Meal> meals = Utils.getMeals();
+
         // for each meal, add a label that says the meal name
         // for each meal, add a button that says "View Ingredients"
         // for each meal, add a button that says "View Details"
@@ -49,6 +51,11 @@ public class BrowseMealsPanel extends JPanel {
 
             // bookmark checkbutton
             JCheckBox bookmarkButton = new JCheckBox("Bookmark");
+            // if the meal is bookmarked, set the checkbox to selected
+            if (((MealPrepper) Utils.getLoggedInUser()).getBookmarkedMeals().contains(meal)) {
+                bookmarkButton.setSelected(true);
+            }
+
             mealPanel.add(bookmarkButton);
 
             JButton reviewButton = new JButton("Review");
@@ -61,6 +68,10 @@ public class BrowseMealsPanel extends JPanel {
         }
 
         add(new JScrollPane(mealListPanel), BorderLayout.CENTER);
+    }
+
+    public void setMeals(HashSet<Meal> meals) {
+        this.meals = meals;
     }
 
     public HashMap<Meal, JComponent[]> getMealButtons() {

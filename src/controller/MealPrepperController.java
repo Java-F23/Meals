@@ -1,6 +1,13 @@
 package controller;
 import helper.Utils;
+import model.Meal;
+import model.MealPrepper;
+import view.BrowseMealsPanel;
 import view.MealPrepperFrame;
+
+import java.util.HashSet;
+import java.util.List;
+
 public class MealPrepperController {
     // This is the controller class for the MealPrepperFrame.
     // It is responsible for creating the frame and adding the panels to it.
@@ -11,9 +18,9 @@ public class MealPrepperController {
     public MealPrepperController() {
         mpf = new MealPrepperFrame();
         new BrowseMealsController(mpf.getBrowseMealsPanel());
+        new BrowseMealsController(mpf.getBookmarkedMealsPanel());
 //        new CurrentMealPlanController(mpf.getCurrentMealPlanPanel());
 //        new ShoppingListController(mpf.getShoppingListPanel());
-//        new BookmarkedMealsController(mpf.getBookmarkedMealsPanel());
 //        new MealPlanHistoryController(mpf.getMealPlanHistoryPanel());
 
         // Add action listeners to the buttons in the side menu
@@ -28,6 +35,11 @@ public class MealPrepperController {
             mpf.getCardLayout().show(mpf.getMainPanel(), mpf.getMainPanel().getShoppingListPanelName());
         });
         mpf.getSideMenuPanel().getBookmarkedMealsButton().addActionListener(e -> {
+            // refresh the bookmarked meals panel
+            mpf.getMainPanel().removeBookmarkedMealsPanel();
+            mpf.setBookmarkedMealsPanel(new BrowseMealsPanel(((MealPrepper) Utils.getLoggedInUser()).getBookmarkedMeals()));
+            new BrowseMealsController(mpf.getBookmarkedMealsPanel());
+            mpf.getMainPanel().add(mpf.getBookmarkedMealsPanel(), mpf.getMainPanel().getBookmarkedMealsPanelName());
             mpf.getCardLayout().show(mpf.getMainPanel(), mpf.getMainPanel().getBookmarkedMealsPanelName());
         });
         mpf.getSideMenuPanel().getMealPlanHistoryButton().addActionListener(e -> {

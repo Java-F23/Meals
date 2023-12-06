@@ -1,9 +1,11 @@
 package view;
 import helper.Utils;
 import helper.paths;
+import model.MealPrepper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashSet;
 
 public class MealPrepperFrame extends JFrame {
     // The MealPrepperFrame class is the main frame for the MealPrepper user type. It will contain a header, side menu, and a main panel that displays corresponding information.
@@ -17,7 +19,7 @@ public class MealPrepperFrame extends JFrame {
     private CurrentMealPlanPanel currentMealPlanPanel;
     private BrowseMealsPanel browseMealsPanel;
     private ShoppingListPanel shoppingListPanel;
-    private BookmarkedMealsPanel bookmarkedMealsPanel;
+    private BrowseMealsPanel bookmarkedMealsPanel;
     private MealPlanHistoryPanel mealPlanHistoryPanel;
     private CardLayout cardLayout;
 
@@ -32,6 +34,10 @@ public class MealPrepperFrame extends JFrame {
     private final int height = 600;
     private final int navBarHeight = 50;
     private final int sideBarWidth = 200;
+
+    public void setBookmarkedMealsPanel(BrowseMealsPanel browseMealsPanel) {
+        this.bookmarkedMealsPanel = browseMealsPanel;
+    }
 
 
     public class HeaderPanel extends JPanel {
@@ -135,9 +141,9 @@ public class MealPrepperFrame extends JFrame {
             setLayout(cardLayout);
 
             currentMealPlanPanel = new CurrentMealPlanPanel();
-            browseMealsPanel = new BrowseMealsPanel();
+            browseMealsPanel = new BrowseMealsPanel(new HashSet<>(Utils.getMeals()));
             shoppingListPanel = new ShoppingListPanel();
-            bookmarkedMealsPanel = new BookmarkedMealsPanel();
+            bookmarkedMealsPanel = new BrowseMealsPanel(((MealPrepper) Utils.getLoggedInUser()).getBookmarkedMeals());
             mealPlanHistoryPanel = new MealPlanHistoryPanel();
 
             add(browseMealsPanel, browseMealsPanelName);
@@ -165,6 +171,10 @@ public class MealPrepperFrame extends JFrame {
 
         public String getMealPlanHistoryPanelName() {
             return mealPlanHistoryPanelName;
+        }
+
+        public void removeBookmarkedMealsPanel() {
+            remove(bookmarkedMealsPanel);
         }
     }
 
@@ -211,7 +221,7 @@ public class MealPrepperFrame extends JFrame {
         return shoppingListPanel;
     }
 
-    public BookmarkedMealsPanel getBookmarkedMealsPanel() {
+    public BrowseMealsPanel getBookmarkedMealsPanel() {
         return bookmarkedMealsPanel;
     }
 

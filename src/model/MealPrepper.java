@@ -25,4 +25,8 @@ public class MealPrepper extends User implements Serializable {
         bookmarkedMeals.remove(meal);
         meal.decrementBookmarkCount();
     }
+
+    public HashSet<Meal> getBookmarkedMeals() {
+        return bookmarkedMeals;
+    }
 }
