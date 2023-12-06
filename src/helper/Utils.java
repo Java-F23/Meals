@@ -93,55 +93,17 @@ public class Utils {
     }
 
     private static boolean isValidEmail(String email) throws ArrayIndexOutOfBoundsException{
-        // email validation
+        // email validation using regex
         // Email format: <username>@<domain>
-
-        // check if email contains @
-        if (!email.contains("@")) {
-            return false;
-        }
-
-        // split email into username and domain
-        String[] emailParts = email.split("@");
-
-        String username = emailParts[0];
-        String domain = emailParts[1];
-
-        // check if username is empty
-        if (username.isEmpty()) {
-            return false;
-        }
-
-        // check if domain contains .
-        if (!domain.contains(".")) {
-            return false;
-        }
-
-        // check if domain is empty
-        return !domain.startsWith(".") && !domain.endsWith(".");
+        return email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     }
 
     private static void isValidPhoneNumber(String phone) throws InvalidPhoneNumberException {
         // phone number validation
         // Phone number format: <01><9-digit number>
-
-        // check if phone number contains 11 digits
-        if (phone.length() != 11) {
-            throw new InvalidPhoneNumberException("Phone number must have 11 digits");
+        if (!phone.matches("^(01)[0-9]{9}$")) {
+            throw new InvalidPhoneNumberException("Invalid phone number format");
         }
-
-        // check if phone number starts with 01
-        if (!phone.startsWith("01")) {
-            throw new InvalidPhoneNumberException("Phone number must start with '01'");
-        }
-
-        // check if phone number contains only digits
-        for (int i = 2; i < phone.length(); i++) {
-            if (!Character.isDigit(phone.charAt(i))) {
-                throw new InvalidPhoneNumberException("Phone number must contain only digits");
-            }
-        }
-
     }
 
     public static void setLoggedInUser(User loggedInUser) {
@@ -150,10 +112,6 @@ public class Utils {
 
     public static User getLoggedInUser() {
         return loggedInUser;
-    }
-
-    public static void logout() {
-        loggedInUser = null;
     }
 
     public static ArrayList<Chef> getChefs() {

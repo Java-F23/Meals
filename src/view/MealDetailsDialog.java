@@ -22,6 +22,8 @@ public class MealDetailsDialog extends JDialog {
         add(new JLabel("Prep time: " + meal.getPreparationTime()));
         add(new JLabel("Instructions: " + meal.getInstructions()));
         add(new JLabel("Cuisine: " + meal.getCuisine()));
+        add(new JLabel("Created by: " + meal.getChefName()));
+        add(new JLabel("Bookmark count: " + meal.getBookmarkCount()));
 
         // set the size
         setSize(500, 300);

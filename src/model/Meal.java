@@ -84,6 +84,14 @@ public class Meal implements Serializable {
         return bookmarkCount;
     }
 
+    public void incrementBookmarkCount() {
+        bookmarkCount++;
+    }
+
+    public void decrementBookmarkCount() {
+        bookmarkCount--;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

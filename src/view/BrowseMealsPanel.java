@@ -12,7 +12,7 @@ public class BrowseMealsPanel extends JPanel {
     // the list of meals will be displayed in a vertical scrollable list
 
     // list of meals with their corresponding buttons
-    private HashMap<Meal, JButton[]> mealButtons;
+    private HashMap<Meal, JComponent[]> mealButtons;
 
     public BrowseMealsPanel() {
         mealButtons = new HashMap<>();
@@ -43,16 +43,27 @@ public class BrowseMealsPanel extends JPanel {
             JButton addToMealPlanButton = new JButton("Add to Meal Plan");
             mealPanel.add(addToMealPlanButton);
 
+            JButton addToShoppingListButton = new JButton("Add to Shopping List");
+            addToShoppingListButton.setToolTipText("Add all ingredients to shopping list without affecting meal plan");
+            mealPanel.add(addToShoppingListButton);
+
+            // bookmark checkbutton
+            JCheckBox bookmarkButton = new JCheckBox("Bookmark");
+            mealPanel.add(bookmarkButton);
+
+            JButton reviewButton = new JButton("Review");
+            mealPanel.add(reviewButton);
+
             mealListPanel.add(mealPanel);
 
             // add the meal and its buttons to the hashmap
-            mealButtons.put(meal, new JButton[]{viewIngredientsButton, viewDetailsButton, addToMealPlanButton});
+            mealButtons.put(meal, new JComponent[]{viewIngredientsButton, viewDetailsButton, addToMealPlanButton, addToShoppingListButton, bookmarkButton, reviewButton});
         }
 
         add(new JScrollPane(mealListPanel), BorderLayout.CENTER);
     }
 
-    public HashMap<Meal, JButton[]> getMealButtons() {
+    public HashMap<Meal, JComponent[]> getMealButtons() {
         return mealButtons;
     }
 }
