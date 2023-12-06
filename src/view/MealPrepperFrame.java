@@ -134,8 +134,8 @@ public class MealPrepperFrame extends JFrame {
             bookmarkedMealsPanel = new BookmarkedMealsPanel();
             mealPlanHistoryPanel = new MealPlanHistoryPanel();
 
-            add(currentMealPlanPanel, currentMealPlanPanelName);
             add(browseMealsPanel, browseMealsPanelName);
+            add(currentMealPlanPanel, currentMealPlanPanelName);
             add(shoppingListPanel, shoppingListPanelName);
             add(bookmarkedMealsPanel, bookmarkedMealsPanelName);
             add(mealPlanHistoryPanel, mealPlanHistoryPanelName);
