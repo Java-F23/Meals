@@ -24,7 +24,7 @@ public class MealDetailsDialog extends JDialog {
         add(new JLabel("Cuisine: " + meal.getCuisine()));
 
         // set the size
-        setSize(300, 300);
+        setSize(500, 300);
 
         // set the location
         setLocationRelativeTo(null);

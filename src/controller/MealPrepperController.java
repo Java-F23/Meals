@@ -1,4 +1,5 @@
 package controller;
+import helper.Utils;
 import view.MealPrepperFrame;
 public class MealPrepperController {
     // This is the controller class for the MealPrepperFrame.
@@ -31,6 +32,12 @@ public class MealPrepperController {
         });
         mpf.getSideMenuPanel().getMealPlanHistoryButton().addActionListener(e -> {
             mpf.getCardLayout().show(mpf.getMainPanel(), mpf.getMainPanel().getMealPlanHistoryPanelName());
+        });
+
+        mpf.getLogout().addActionListener(e -> {
+            Utils.setLoggedInUser(null);
+            new WelcomeFrameController();
+            mpf.dispose();
         });
 
         // Add action listeners to the buttons in the current meal plan panel

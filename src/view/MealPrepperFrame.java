@@ -27,10 +27,12 @@ public class MealPrepperFrame extends JFrame {
     private JButton currentMealPlanButton;
     private JButton mealPlanHistoryButton;
 
+    JButton logoutButton;
     private final int width = 1000;
     private final int height = 600;
     private final int navBarHeight = 50;
     private final int sideBarWidth = 200;
+
 
     public class HeaderPanel extends JPanel {
         public HeaderPanel() {
@@ -63,11 +65,15 @@ public class MealPrepperFrame extends JFrame {
 
             userPanel.add(usernameLabel, BorderLayout.CENTER);
 
-            JButton logoutButton = new JButton("Logout");
+            logoutButton = new JButton("Logout");
 
             userPanel.add(logoutButton, BorderLayout.EAST);
 
             add(userPanel, BorderLayout.EAST);
+        }
+
+        public JButton getLogout() {
+            return logoutButton;
         }
     }
 
@@ -215,5 +221,9 @@ public class MealPrepperFrame extends JFrame {
 
     public CardLayout getCardLayout() {
         return cardLayout;
+    }
+
+    public JButton getLogout() {
+        return headerPanel.getLogout();
     }
 }
