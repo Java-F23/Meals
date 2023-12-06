@@ -9,6 +9,11 @@ public class MealPrepperController {
 
     public MealPrepperController() {
         mpf = new MealPrepperFrame();
+        new BrowseMealsController(mpf.getBrowseMealsPanel());
+//        new CurrentMealPlanController(mpf.getCurrentMealPlanPanel());
+//        new ShoppingListController(mpf.getShoppingListPanel());
+//        new BookmarkedMealsController(mpf.getBookmarkedMealsPanel());
+//        new MealPlanHistoryController(mpf.getMealPlanHistoryPanel());
 
         // Add action listeners to the buttons in the side menu
         // each button will switch to the corresponding panel using cardlayout
