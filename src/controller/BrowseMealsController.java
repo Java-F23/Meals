@@ -4,9 +4,7 @@ import helper.paths;
 import model.Ingredient;
 import model.Meal;
 import model.MealPrepper;
-import model.User;
 import view.BrowseMealsPanel;
-import view.MealDetailsDialog;
 import view.ingredientsDialog;
 
 import javax.swing.*;
@@ -108,6 +106,7 @@ public class BrowseMealsController {
                 }
                 // decrement the bookmark count in the meals table
                 int bookmarkCount = (int) browseMealsPanel.getMealTable().getValueAt(selectedRow, 6);
+                bookmarkCount = bookmarkCount == 0 ? 0 : bookmarkCount + 1;
                 browseMealsPanel.getMealTable().setValueAt(bookmarkCount - 1, selectedRow, 6);
                 JOptionPane.showMessageDialog(null, "Meal removed from your bookmarked meals");
             }

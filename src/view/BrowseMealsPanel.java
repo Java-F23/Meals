@@ -17,6 +17,7 @@ public class BrowseMealsPanel extends JPanel {
     private JButton removeMealFromBookmarkedMealsButton;
     private JButton addMealToCurrentMealPlanButton;
     private JButton viewMealIngredientsButton;
+    private JButton viewMealDetailsButton;
     private JTable mealTable;
     private HashMap<Integer, Meal> mealMap;
     private HashSet<Meal> meals;
@@ -59,7 +60,9 @@ public class BrowseMealsPanel extends JPanel {
         removeMealFromBookmarkedMealsButton = new JButton("Remove from Bookmarked Meals");
         addMealToCurrentMealPlanButton = new JButton("Add to Current Meal Plan");
         viewMealIngredientsButton = new JButton("View Ingredients");
+        viewMealDetailsButton = new JButton("View Details");
 
+        buttonsPanel.add(viewMealDetailsButton);
         buttonsPanel.add(addMealToBookmarkedMealsButton);
         buttonsPanel.add(removeMealFromBookmarkedMealsButton);
         buttonsPanel.add(addMealToCurrentMealPlanButton);

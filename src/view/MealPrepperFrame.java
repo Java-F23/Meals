@@ -176,6 +176,8 @@ public class MealPrepperFrame extends JFrame {
     public MealPrepperFrame() {
         super("Meals");
         setSize(width, height);
+        // disable resizing
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
