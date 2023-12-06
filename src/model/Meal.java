@@ -95,4 +95,36 @@ public class Meal implements Serializable {
         }
         return sb.toString();
     }
+
+    public Float getTotalCalories() {
+        float totalCalories = 0f;
+        for (Ingredient ingredient : ingredients.keySet()) {
+            totalCalories += ingredient.getCalories() * ingredients.get(ingredient);
+        }
+        return totalCalories;
+    }
+
+    public Float getTotalFat() {
+        float totalFat = 0f;
+        for (Ingredient ingredient : ingredients.keySet()) {
+            totalFat += ingredient.getFat() * ingredients.get(ingredient);
+        }
+        return totalFat;
+    }
+
+    public Float getTotalCarbohydrates() {
+        float totalCarbohydrates = 0f;
+        for (Ingredient ingredient : ingredients.keySet()) {
+            totalCarbohydrates += ingredient.getCarbohydrates() * ingredients.get(ingredient);
+        }
+        return totalCarbohydrates;
+    }
+
+    public Float getTotalProtein() {
+        float totalProtein = 0f;
+        for (Ingredient ingredient : ingredients.keySet()) {
+            totalProtein += ingredient.getProtein() * ingredients.get(ingredient);
+        }
+        return totalProtein;
+    }
 }
